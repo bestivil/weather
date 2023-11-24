@@ -3,6 +3,7 @@
 import FaSun from "./assests/images/FaSun.png";
 import "./App.css";
 import { useState } from "react";
+import AutoComplete from "./components/AutoComplete";
 
 const App = () => {
 
@@ -14,6 +15,7 @@ const App = () => {
     <div>
       <h3>react-typescript boilerplate!</h3>
       <h5>testing lint stage!!</h5>
+      <AutoComplete title={location} />
 
 
       <img src={FaSun} alt="FaSun" />

@@ -1,15 +1,15 @@
-import * as React from 'react';
-import TextField from '@mui/material/TextField';
+import { TextField } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
 
-export default function ComboBox() {
+export default function AC({ title }:any) {
   return (
     <Autocomplete
-      disablePortal
       id="combo-box-demo"
       options={top100Films}
       sx={{ width: 300 }}
-      renderInput={(params) => <TextField {...params} label="Movie" />}
+      renderInput={(params) => <TextField {...params} label="City" />}
+      value={title}
+      
     />
   );
 }
