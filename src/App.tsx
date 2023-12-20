@@ -2,25 +2,21 @@
 // <reference path="path/types.d.ts" />
 import FaSun from "./assests/images/FaSun.png";
 import "./App.css";
-import { useState } from "react";
-import AutoComplete from "./components/AutoComplete";
+import { useEffect, useState } from "react";
+import { Locations } from "./constants";
+import AC from "./components/AutoComplete";
 
 const App = () => {
 
-  const [location, setLocation] = useState('London');
+  const [location, setLocation] = useState(Locations[0]);
   
-  
+  useEffect(() => {
+    console.log("Location changed to:",location)
+  },[location])
   
   return (
     <div>
-      <h3>react-typescript boilerplate!</h3>
-      <h5>testing lint stage!!</h5>
-      <AutoComplete title={location} />
-
-
-      <img src={FaSun} alt="FaSun" />
-      
-
+      <AC locSelected={location} onSelectedClick={setLocation} />
     </div>
   );
 };
