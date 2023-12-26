@@ -16,7 +16,7 @@ export default function AC({ locSelected, onSelectedClick }:LocationType) {
       id="location-combo-box"
       options={Locations}
       sx={{ width: 300 }}
-      defaultValue={locSelected}
+      value={locSelected}
       renderInput={(params) => <TextField {...params} label="City" />}
       onChange={handleClick}
       
