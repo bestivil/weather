@@ -6,17 +6,17 @@ import Typography from '@mui/material/Typography';
 
 
 
-export default function BasicCard({ weather }:any) {
+export default function BasicCard({ weather, label }:any) {
   return (
     <Card sx={{ maxWidth: 300, backgroundColor: "skyblue" }}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Temperature
+          {label}
         </Typography>
         <Typography variant="h5" component="div">
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            {weather.temperature}
+            {weather}
         </Typography>
       </CardContent>
       <CardActions>

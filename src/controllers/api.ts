@@ -8,8 +8,10 @@ const fetchWeather = async (location: string, setWeatherInstance: (weather:Weath
         const json = await response.json();
         
         const weatherData: WeatherType = {
-            temperature: json.current.temp_c,
-            condition: json.current.condition.text
+            Temperature: json.current.temp_c,
+            Conditions: json.current.condition.text,
+            "Wind Speed": json.current.wind_mph,
+	        "Feels Like": json.current.feelslike_c,
         };
         
 

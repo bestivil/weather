@@ -13,26 +13,38 @@ import { WeatherType } from "./types";
 
 const App = () => {
   const [location, setLocation] = useState(Locations[0]);
-  const [WeatherInstance, setWeatherInstance] = useState<WeatherType>({});
-
-  
+  const [WeatherInstance, setWeatherInstance] = useState<WeatherType>({});  
 
   useEffect(() => {
-    const Func = async () => {
+    const WeatherFunc = async () => {
       const weatherData =  await fetchWeather(location,setWeatherInstance);
       if (weatherData) {
         setWeatherInstance(weatherData);
       }
 
     };
-    Func();
+    WeatherFunc();
     
   }, [location]);
+
   
+  var arr = [];
+  if (WeatherInstance) {
+    let key: keyof typeof WeatherInstance;
+    for (key in WeatherInstance) {
+      console.log(WeatherInstance[key]);
+      arr.push(<BasicCard weather={WeatherInstance[key]} label={key} />);
+    };
+
+  }
+    
+
   return (
-      <><div>
+    <><div>
       <AC locSelected={location} onSelectedClick={setLocation} />
-    </div><BasicCard weather={WeatherInstance} /></>
+    </div>
+    {arr}
+    </>
 
   );
 };
