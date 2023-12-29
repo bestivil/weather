@@ -40,10 +40,17 @@ const App = () => {
     
 
   return (
-    <><div>
+    <><div style={{margin: '10px auto', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
       <AC locSelected={location} onSelectedClick={setLocation} />
-    </div>
-    {arr}
+    </div >
+    <div style={{ marginTop: '10px', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(700px, 1fr))', gap: '10px' }}>
+        {arr.map((card, index) => (
+          <div key={index}>
+            {card}
+          </div>
+        ))}
+      </div>
+    
     </>
 
   );

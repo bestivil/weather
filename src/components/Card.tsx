@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 
 export default function BasicCard({ weather, label }:any) {
   return (
-    <Card sx={{ maxWidth: 300, backgroundColor: "skyblue" }}>
+    <Card sx={{ margin: '10px', textAlign: 'center', maxWidth: '95%', backgroundColor: "skyblue" }}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           {label}
