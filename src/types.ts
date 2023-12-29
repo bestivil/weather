@@ -9,5 +9,6 @@ export type WeatherType = {
 	Conditions?: string;
 	["Wind Speed"]?: number;
 	["Feels Like"]?: number;
+	datetime?: string;
 
 };
