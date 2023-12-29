@@ -7,6 +7,7 @@ import AC from "./components/AutoComplete";
 import BasicCard from "./components/Card";
 import fetchWeather from "./controllers/api";
 import { WeatherType } from "./types";
+import { Button } from "@mui/material";
 
 
 
@@ -49,7 +50,9 @@ const App = () => {
             {card}
           </div>
         ))}
-      </div>
+    </div>
+    <div style={{ position: 'fixed', bottom: '2%', left: '50%', transform: 'translateX(-50%)'}}> <Button sx={{ width: 1}}>See More</Button></div>
+      
     
     </>
 
