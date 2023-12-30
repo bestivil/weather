@@ -12,6 +12,7 @@ const fetchWeather = async (location: string, setWeatherInstance: (weather:Weath
             Conditions: json.current.condition.text,
             "Wind Speed": json.current.wind_mph,
 	        "Feels Like": json.current.feelslike_c,
+            datetime: json.location.localtime
         };
         
 
