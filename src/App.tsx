@@ -8,40 +8,39 @@ import BasicCard from "./components/Card";
 import fetchWeather from "./controllers/api";
 import { WeatherType } from "./types";
 import { Button } from "@mui/material";
+import { findTimeSlot } from "./controllers/timing";
 
-
-const sunrise1 = new Date().setHours(0,0,0);
-const sunrise2 = new Date().setHours(3,0,0);
-const sunrise3 = new Date().setHours(6,0,0);
-const sunrise4 = new Date().setHours(9,0,0);
-const sunset1 = new Date().setHours(12,0,0);
-const sunset2 = new Date().setHours(25,0,0);
-const sunset3 = new Date().setHours(18,0,0);
-const sunset4 = new Date().setHours(21,0,0);
-const currentTime = new Date()
 
 const App = () => {
   const [location, setLocation] = useState(Locations[0]);
   const [WeatherInstance, setWeatherInstance] = useState<WeatherType>({});  
+  const [backgroundTime, setBackgroundTime] = useState<string>();
 
   useEffect(() => {
     const WeatherFunc = async () => {
       const weatherData =  await fetchWeather(location,setWeatherInstance);
       if (weatherData) {
         setWeatherInstance(weatherData);
+        setBackgroundTime(findTimeSlot(weatherData?.datetime!.slice(-5).toString()));
+
       }
+
+      
 
     };
     WeatherFunc();
+  
     
   }, [location]);
 
   useEffect(() => {
-    var locationTime = WeatherInstance.datetime?.slice(-5);
-    if (locationTime) {
-      currentTime.setHours(parseInt(locationTime?.slice(2),10));
+    if (WeatherInstance) {
+      
     }
-  },[WeatherInstance.datetime]);
+  },[WeatherInstance])
+
+  
+
 
   
   var arr = [];
@@ -57,7 +56,7 @@ const App = () => {
 
   return (
     <>
-    <div style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/assets/backgrounds/sunset2.jpg)`, backgroundSize: 'cover', backgroundPosition: 'center', height: '100vh', display: 'flex', flexDirection: 'column', marginTop: '-0px' }}>
+    <div style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/assets/backgrounds/${backgroundTime}.jpg)`, backgroundSize: 'cover', backgroundPosition: 'center', height: '100vh', display: 'flex', flexDirection: 'column', marginTop: '-0px' }}>
     <div style={{margin: '12px auto', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
       <AC locSelected={location} onSelectedClick={setLocation} />
     </div >
