@@ -5,7 +5,7 @@ export type LocationType = {
 
 export type WeatherType = {
 	label?: string;
-	Temperature?: number;
+	"Current Temperature"?: number;
 	Conditions?: string;
 	["Wind Speed"]?: number;
 	["Feels Like"]?: number;
