@@ -22,27 +22,11 @@ const App = () => {
       if (weatherData) {
         setWeatherInstance(weatherData);
         setBackgroundTime(findTimeSlot(weatherData?.datetime!.slice(-5).toString()));
-
       }
-
-      
-
     };
     WeatherFunc();
-  
-    
   }, [location]);
 
-  useEffect(() => {
-    if (WeatherInstance) {
-      
-    }
-  },[WeatherInstance])
-
-  
-
-
-  
   var arr = [];
   if (WeatherInstance) {
     let key: keyof typeof WeatherInstance;
@@ -50,10 +34,8 @@ const App = () => {
       console.log(WeatherInstance[key]);
       arr.push(<BasicCard weather={WeatherInstance[key]} label={key} />);
     };
-
   }
-    
-
+  
   return (
     <>
     <div style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/assets/backgrounds/${backgroundTime}.jpg)`, backgroundSize: 'cover', backgroundPosition: 'center', height: '100vh', display: 'flex', flexDirection: 'column', marginTop: '-0px' }}>
@@ -71,7 +53,6 @@ const App = () => {
     <Button sx={{ width: 1}}>See More</Button>
     </div>
     </div>
-    
     </>
 
   );
