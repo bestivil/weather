@@ -1,14 +1,13 @@
 export type LocationType = {
-	locSelected: string;
-	onSelectedClick: (alignment: any) => void; };
-
+  locSelected: string;
+  onSelectedClick: (alignment: any) => void;
+};
 
 export type WeatherType = {
-	label?: string;
-	Temperature?: number;
-	Conditions?: string;
-	["Wind Speed"]?: number;
-	["Feels Like"]?: number;
-	datetime?: string;
-
+  label?: string;
+  "Current Temperature"?: number;
+  Conditions?: string;
+  ["Wind Speed"]?: number;
+  ["Feels Like"]?: number;
+  datetime?: string;
 };

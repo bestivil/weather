@@ -1,2 +1,2 @@
 
-export const Locations = ["London","Milan"];
+export const Locations = ["London","Milan", "Tokyo"];

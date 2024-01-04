@@ -1,14 +1,13 @@
-import { TextField } from '@mui/material';
-import Autocomplete from '@mui/material/Autocomplete';
-import { LocationType } from '../types';
-import { Locations } from '../constants';
-import { SyntheticEvent } from 'react';
+import { TextField } from "@mui/material";
+import Autocomplete from "@mui/material/Autocomplete";
+import { LocationType } from "../types";
+import { Locations } from "../constants";
+import { SyntheticEvent } from "react";
 
-export default function AC({ locSelected, onSelectedClick }:LocationType) {
-
+export default function AC({ locSelected, onSelectedClick }: LocationType) {
   const handleClick = (event: SyntheticEvent, newValue: string | null) => {
-    onSelectedClick(newValue)
-  }
+    onSelectedClick(newValue);
+  };
 
   return (
     <Autocomplete
@@ -19,8 +18,6 @@ export default function AC({ locSelected, onSelectedClick }:LocationType) {
       value={locSelected}
       renderInput={(params) => <TextField {...params} />}
       onChange={handleClick}
-      
     />
   );
 }
-
