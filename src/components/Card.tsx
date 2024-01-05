@@ -3,7 +3,15 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
-export default function BasicCard({ weather, label }: any) {
+export default function BasicCard({
+  weather,
+  label,
+  img,
+}: {
+  weather?: any; // TODO: strongly type after testing
+  label: string;
+  img?: string;
+}) {
   return (
     <>
       <Card
@@ -11,10 +19,14 @@ export default function BasicCard({ weather, label }: any) {
           margin: "10px",
           textAlign: "center",
           maxWidth: "99%",
-          backgroundColor: "white",
+          backgroundColor: "#E6E6E6",
           overflow: "hidden",
           borderRadius: 8,
           boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+          marginTop: "10px",
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(700px, 1fr))",
+          gap: "10px",
         }}
       >
         <CardContent>
@@ -22,14 +34,18 @@ export default function BasicCard({ weather, label }: any) {
             sx={{ fontSize: 14, textAlign: "left" }}
             color="text.secondary"
             gutterBottom
-          >
-            {label}
-          </Typography>
+          ></Typography>
           <Typography variant="h5" component="div"></Typography>
+          <img src={img} alt={label}></img>
           <Typography
             sx={{ mb: 1.5 }}
             {...(label === "Current Temperature"
-              ? { fontSize: 20, textAlign: "left", marginLeft: 8 }
+              ? {
+                  fontSize: 29,
+                  textAlign: "left",
+                  marginLeft: 8,
+                  fontWeight: "bold",
+                }
               : { fontSize: 14 })}
             color="text.secondary"
           >

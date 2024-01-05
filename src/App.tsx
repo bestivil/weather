@@ -7,12 +7,11 @@ import AC from "./components/AutoComplete";
 import BasicCard from "./components/Card";
 import fetchWeather from "./controllers/api";
 import { WeatherType } from "./types";
-import { Button } from "@mui/material";
 import { findTimeSlot } from "./controllers/timing";
 
 const App = () => {
   const [location, setLocation] = useState(Locations[0]);
-  const [WeatherInstance, setWeatherInstance] = useState<WeatherType>({});
+  const [WeatherInstance, setWeatherInstance] = useState<WeatherType>();
   const [backgroundTime, setBackgroundTime] = useState<string>();
 
   useEffect(() => {
@@ -27,15 +26,7 @@ const App = () => {
     };
     WeatherFunc();
   }, [location]);
-
-  var arr = [];
-  if (WeatherInstance) {
-    let key: keyof typeof WeatherInstance;
-    for (key in WeatherInstance) {
-      console.log(WeatherInstance[key]);
-      arr.push(<BasicCard weather={WeatherInstance[key]} label={key} />);
-    }
-  }
+  console.log(WeatherInstance?.currTempImg.slice(2));
 
   return (
     <>
@@ -60,27 +51,12 @@ const App = () => {
         >
           <AC locSelected={location} onSelectedClick={setLocation} />
         </div>
-        <div
-          style={{
-            marginTop: "10px",
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(700px, 1fr))",
-            gap: "10px",
-          }}
-        >
-          {arr.map((card, index) => (
-            <div key={index}>{card}</div>
-          ))}
-        </div>
-        <div
-          style={{
-            position: "fixed",
-            bottom: "2%",
-            left: "50%",
-            transform: "translateX(-50%)",
-          }}
-        >
-          <Button sx={{ width: 1 }}>See More</Button>
+        <div>
+          <BasicCard
+            weather={WeatherInstance?.Temp}
+            label="Current Temperature"
+            img={WeatherInstance?.currTempImg.slice(2)}
+          />
         </div>
       </div>
     </>

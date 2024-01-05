@@ -13,7 +13,8 @@ const fetchWeather = async (
     const json = await response.json();
 
     const weatherData: WeatherType = {
-      "Current Temperature": json.current.temp_c,
+      Temp: json.current.temp_c,
+      currTempImg: json.current.condition.icon,
       Conditions: json.current.condition.text,
       "Wind Speed": json.current.wind_mph,
       "Feels Like": json.current.feelslike_c,
