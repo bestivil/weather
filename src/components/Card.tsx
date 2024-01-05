@@ -7,10 +7,12 @@ export default function BasicCard({
   weather,
   label,
   img,
+  conditions,
 }: {
   weather?: any; // TODO: strongly type after testing
   label: string;
   img?: string;
+  conditions?: string;
 }) {
   return (
     <>
@@ -50,6 +52,7 @@ export default function BasicCard({
             color="text.secondary"
           >
             {weather}
+            {conditions}
           </Typography>
         </CardContent>
         <CardActions></CardActions>

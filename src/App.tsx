@@ -55,7 +55,8 @@ const App = () => {
           <BasicCard
             weather={WeatherInstance?.Temp}
             label="Current Temperature"
-            img={WeatherInstance?.currTempImg.slice(2)}
+            img={`http://${WeatherInstance?.currTempImg?.slice(2) || ""}`}
+            conditions={WeatherInstance?.Conditions}
           />
         </div>
       </div>
