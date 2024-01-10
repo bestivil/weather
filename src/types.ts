@@ -5,9 +5,10 @@ export type LocationType = {
 
 export type WeatherType = {
   label?: string;
-  "Current Temperature"?: number;
+  Temp?: number;
   Conditions?: string;
   ["Wind Speed"]?: number;
   ["Feels Like"]?: number;
   datetime?: string;
+  currTempImg: string;
 };
