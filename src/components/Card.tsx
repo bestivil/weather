@@ -13,7 +13,7 @@ export default function BasicCard({
   img?: string;
   conditions?: string;
 }) {
-  const times = ["7pm", "8pm", "9pm"];
+  const times = ["7pm", "8pm", "9pm", "10pm"];
   return (
     <>
       <Card
@@ -47,9 +47,7 @@ export default function BasicCard({
             {times.map((time, index) => (
               <div
                 key={index}
-                className={` flex flex-col items-center ${
-                  index > 1 ? "hidden" : "[@media(min-width:100px)]:visible"
-                }  ml-${
+                className={` flex flex-col items-center ml-${
                   index === times.length ? `${100 / times.length}%` : "auto"
                 } mt-2 mr-2 `}
               >
@@ -87,7 +85,7 @@ export default function BasicCard({
           overflow: "hidden",
           borderRadius: 8,
           boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
-          marginTop: 5,
+          marginTop: 4,
         }}
       >
         <CardContent>
@@ -128,7 +126,7 @@ export default function BasicCard({
               <div className="items-center justify-center">
                 <p className="font-bold text-sm z-10">
                   {" "}
-                  {`Wind Speed (mph)`}{" "}
+                  {`Wind Speed (mph)`}
                   {/*TODO: change the windspeed to API call */}
                 </p>
               </div>
