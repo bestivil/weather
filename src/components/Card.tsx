@@ -91,13 +91,14 @@ export default function BasicCard({
         }}
       >
         <CardContent>
-          <div className="flex">
-            <div className="flex flex-col mt-auto items-center text-center justify-start translate-x-3 lg:ml-7">
-              <svg className=" w-16 h-16  wr-wind-speed__icon__svg">
+          <div className="flex justify-between">
+            <div className="flex flex-col items-center">
+              <svg className=" w-16 h-16 wr-wind-speed__icon__svg">
                 <defs>
                   <symbol id="a" viewBox="0 0 32 32">
                     <path
                       d="M16.8 6.6V3l2.1 2.1L20 4l-4-4-4 4 1.1 1.1L15.2 3v3.6"
+                      fill="black"
                       className=" wr-icon-wind-direction__svg-arrow"
                     />
                     <circle
@@ -108,20 +109,34 @@ export default function BasicCard({
                       stroke="#000"
                       className="wr-icon-wind-direction__svg-circle"
                     />
+                    <text
+                      x="16"
+                      y="16"
+                      text-anchor="middle"
+                      stroke-width="0.6px"
+                      stroke="black"
+                      alignment-baseline="middle"
+                      fontSize="12"
+                    >
+                      N
+                      {/* TODO: get this from API, rotate svg based on result */}
+                    </text>
                   </symbol>
                 </defs>
                 <use fill="#FFF" className="wr-wind-type-wind" href="#a" />
               </svg>
               <div className="items-center justify-center">
-                <p className="font-bold">
-                  <span className="text-sm z-10">{`Wind Speed (mph)`}</span>
+                <p className="font-bold text-sm z-10">
+                  {" "}
+                  {`Wind Speed (mph)`}{" "}
+                  {/*TODO: change the windspeed to API call */}
                 </p>
               </div>
               <div className="bg-gray-300 w-0.5 ml-20 h-25 "></div>
             </div>
-            <p className="ml-20  mt-12">Air Pressure</p>
-            <p className="ml-20  mt-12">UV</p>
-            <p className="ml-20  mt-12">Humidity</p>
+            <div className="flex mt-14">Air Pressure</div>
+            <div className="flex mt-14">Visibility</div>
+            <div className="flex mt-14">Humidity</div>
           </div>
         </CardContent>
         <CardActions></CardActions>
