@@ -13,7 +13,7 @@ export default function BasicCard({
   img?: string;
   conditions?: string;
 }) {
-  const times = ["7pm", "8pm", "9pm", "10pm"];
+  const times = ["7pm", "8pm", "9pm"];
   return (
     <>
       <Card
@@ -47,7 +47,7 @@ export default function BasicCard({
             {times.map((time, index) => (
               <div
                 key={index}
-                className={` flex flex-col items-center ml-${
+                className={` flex flex-col justify-between items-center ml-${
                   index === times.length ? `${100 / times.length}%` : "auto"
                 } mt-2 mr-2 `}
               >
