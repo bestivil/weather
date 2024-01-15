@@ -25,10 +25,6 @@ export default function BasicCard({
           overflow: "hidden",
           borderRadius: 8,
           boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
-
-          //display: "grid",
-          //gridTemplateColumns: "repeat(auto-fill, minmax(700px, 1fr))",
-          //gap: "10px",
         }}
       >
         <CardContent>

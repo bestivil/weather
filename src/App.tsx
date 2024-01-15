@@ -14,17 +14,22 @@ const App = () => {
   const [location, setLocation] = useState(Locations[0]);
   const [WeatherInstance, setWeatherInstance] = useState<WeatherType>();
   const [backgroundTime, setBackgroundTime] = useState<string>();
-  const [favouritesCards, setfavouritesCards] = useState<String | null>(null);
-
-  const items = { ...localStorage };
-  console.log(items);
+  const [favouritesCards, setfavouritesCards] = useState<String[] | null>(null);
+  const [localStorageData, setLocalStorageData] = useState<string | null>(null);
 
   useEffect(() => {
-    setfavouritesCards(localStorage.getItem("Fav"));
-  }, [favouritesCards]);
+    const items = JSON.parse(localStorageData || "{}");
+    const newData: string[] = [];
+    Object.keys(items).forEach((key) => {
+      newData.push(items[key as keyof typeof items]);
+    });
+
+    setfavouritesCards(newData);
+  }, [localStorageData]);
 
   useEffect(() => {
     const WeatherFunc = async () => {
+      // calls the API and sets WeatherInstance and Background time to base image.
       const weatherData = await fetchWeather(location, setWeatherInstance);
       if (weatherData) {
         setWeatherInstance(weatherData);
@@ -37,8 +42,18 @@ const App = () => {
   }, [location]);
   console.log(WeatherInstance?.currTempImg.slice(2));
 
-  const handleClick = () => {
-    localStorage.setItem("Fav", location);
+  const handleFavIconClick = () => {
+    //handling the adding
+    const existingData = JSON.parse(localStorageData || "{}");
+
+    const currentKeys = Object.keys(existingData);
+    const nextKey =
+      currentKeys.length === 0 ? 1 : Math.max(...currentKeys.map(Number)) + 1; //gets the next [key] value to append to end of localstorage array
+
+    const newData = JSON.stringify({ ...existingData, [nextKey]: location });
+    localStorage.setItem("FavouriteLocations", newData);
+
+    setLocalStorageData(newData); //TODO: strongly type
   };
 
   return (
@@ -60,11 +75,11 @@ const App = () => {
           </div>
           <button
             className={` bg-white-200 rounded-lg flex p-[20px] bk-icon ml-auto ring-black ${
-              location === localStorage.getItem("Fav")
+              location === localStorage.getItem("Fav") //TODO: colouring display from localStorage
                 ? `fill-yellow-300`
                 : `hover:fill-yellow-300`
             } hover:duration-50  translate-x-24`}
-            onClick={handleClick}
+            onClick={handleFavIconClick}
           >
             <svg
               className="mr-[19px]"
