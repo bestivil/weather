@@ -27,6 +27,36 @@ const App = () => {
     setfavouritesCards(newData);
   }, [localStorageData]);
 
+  const handleFavIconClick = () => {
+    //handling the adding
+    const existingData = JSON.parse(localStorageData || "{}");
+
+    const currentKeys = Object.keys(existingData);
+    const nextKey =
+      currentKeys.length === 0 ? 0 : Math.max(...currentKeys.map(Number)) + 1; //gets the next [key] value to append to end of localstorage array
+
+    const newData = JSON.stringify({ ...existingData, [nextKey]: location });
+    localStorage.setItem("FavouriteLocations", newData);
+
+    setLocalStorageData(newData); //TODO: strongly type
+  };
+
+  const handleRemove = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const existingData = JSON.parse(localStorageData || "{}");
+    const currentKeys = Object.values(existingData);
+    delete currentKeys[e.currentTarget.name as unknown as number];
+
+    const newData: string[] = [];
+    currentKeys.forEach((key) => {
+      if (key !== "") {
+        newData.push(key as string); //TODO: push location back into array
+      }
+    });
+
+    localStorage.setItem("FavouriteLocations", JSON.stringify({ ...newData }));
+    setLocalStorageData(JSON.stringify(newData));
+  };
+
   useEffect(() => {
     const WeatherFunc = async () => {
       // calls the API and sets WeatherInstance and Background time to base image.
@@ -40,21 +70,6 @@ const App = () => {
     };
     WeatherFunc();
   }, [location]);
-  console.log(WeatherInstance?.currTempImg.slice(2));
-
-  const handleFavIconClick = () => {
-    //handling the adding
-    const existingData = JSON.parse(localStorageData || "{}");
-
-    const currentKeys = Object.keys(existingData);
-    const nextKey =
-      currentKeys.length === 0 ? 1 : Math.max(...currentKeys.map(Number)) + 1; //gets the next [key] value to append to end of localstorage array
-
-    const newData = JSON.stringify({ ...existingData, [nextKey]: location });
-    localStorage.setItem("FavouriteLocations", newData);
-
-    setLocalStorageData(newData); //TODO: strongly type
-  };
 
   return (
     <>
@@ -105,7 +120,7 @@ const App = () => {
         </div>
         <div className="mt-4">
           <p className="m-5">Favourites</p>
-          <Favourites fav={favouritesCards} />
+          <Favourites fav={favouritesCards} handleRemove={handleRemove} />
         </div>
       </div>
     </>
