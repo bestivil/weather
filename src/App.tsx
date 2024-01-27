@@ -27,7 +27,7 @@ const App = () => {
     setfavouritesCards(newData);
   }, [localStorageData]);
 
-  const handleFavIconClick = () => {
+  const handleAddLocation = () => {
     //handling the adding
     const existingData = JSON.parse(localStorageData || "{}");
 
@@ -38,7 +38,7 @@ const App = () => {
     const newData = JSON.stringify({ ...existingData, [nextKey]: location });
     localStorage.setItem("FavouriteLocations", newData);
 
-    setLocalStorageData(newData); //TODO: strongly type
+    setLocalStorageData(newData);
   };
 
   const handleRemove = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -94,7 +94,7 @@ const App = () => {
                 ? `fill-yellow-300`
                 : `hover:fill-yellow-300`
             } hover:duration-50  translate-x-24`}
-            onClick={handleFavIconClick}
+            onClick={handleAddLocation}
           >
             <svg
               className="mr-[19px]"
@@ -120,7 +120,12 @@ const App = () => {
         </div>
         <div className="mt-4">
           <p className="m-5">Favourites</p>
-          <Favourites fav={favouritesCards} handleRemove={handleRemove} />
+          <Favourites
+            fav={favouritesCards}
+            handleRemove={handleRemove}
+            currentLocationView={location}
+            handleAdd={handleAddLocation}
+          />
         </div>
       </div>
     </>
