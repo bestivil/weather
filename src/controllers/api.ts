@@ -16,9 +16,13 @@ const fetchWeather = async (
       Temp: json.current.temp_c,
       currTempImg: json.current.condition.icon,
       Conditions: json.current.condition.text,
-      "Wind Speed": json.current.wind_mph,
-      "Feels Like": json.current.feelslike_c,
+      wind: json.current.wind_mph,
+      feelslike: json.current.feelslike_c,
       datetime: json.location.localtime,
+      precipMM: json.current.precip_mm,
+      windDir: json.current.wind_dir,
+      visibilityKM: json.current.vis_km,
+      feelsLikeC: json.current.feelslike_c,
     };
 
     setWeatherInstance(weatherData);

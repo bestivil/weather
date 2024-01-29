@@ -7,8 +7,12 @@ export type WeatherType = {
   label?: string;
   Temp?: number;
   Conditions?: string;
-  ["Wind Speed"]?: number;
-  ["Feels Like"]?: number;
+  wind?: number;
+  feelslike?: number;
   datetime?: string;
-  currTempImg: string;
+  currTempImg?: string;
+  precipMM?: number;
+  windDir?: string;
+  visibilityKM?: number;
+  feelsLikeC?: number;
 };

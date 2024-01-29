@@ -116,6 +116,11 @@ const App = () => {
             label="Current Temperature"
             img={`http://${WeatherInstance?.currTempImg?.slice(2) || ""}`}
             conditions={WeatherInstance?.Conditions}
+            wind={WeatherInstance?.wind}
+            precipMM={WeatherInstance?.precipMM}
+            windDir={WeatherInstance?.windDir}
+            vis_km={WeatherInstance?.visibilityKM}
+            feelsLike={WeatherInstance?.feelsLikeC}
           />
         </div>
         <div className="mt-4">
