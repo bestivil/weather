@@ -9,6 +9,7 @@ import fetchWeather from "./controllers/api";
 import { WeatherType } from "./types";
 import { findTimeSlot } from "./controllers/timing";
 import Favourites from "./components/Favourites";
+import CFToggle from "./components/toggle";
 
 const App = () => {
   const [location, setLocation] = useState(Locations[0]);
@@ -16,6 +17,7 @@ const App = () => {
   const [backgroundTime, setBackgroundTime] = useState<string>();
   const [favouritesCards, setfavouritesCards] = useState<String[] | null>(null);
   const [localStorageData, setLocalStorageData] = useState<string | null>(null);
+  const [alignment, setAlignment] = useState("celsius");
 
   useEffect(() => {
     const items = JSON.parse(localStorageData || "{}");
@@ -71,6 +73,10 @@ const App = () => {
     WeatherFunc();
   }, [location]);
 
+  const handleAlignmentChange = (newAlignment: string) => {
+    setAlignment(newAlignment);
+  };
+
   return (
     <>
       <div
@@ -87,6 +93,12 @@ const App = () => {
         <div className=" flex items-center flex-row bg-[#E6E6E6] h-[96px] shadow-gray-200 ">
           <div className="translate-x-[18px]">
             <AC locSelected={location} onSelectedClick={setLocation} />
+          </div>
+          <div className="ml-9">
+            <CFToggle
+              alignment={alignment}
+              newAlignment={handleAlignmentChange}
+            />
           </div>
           <button
             className={` bg-white-200 rounded-lg flex p-[20px] bk-icon ml-auto ring-black ${
