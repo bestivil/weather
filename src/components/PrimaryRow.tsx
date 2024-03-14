@@ -8,8 +8,8 @@ export default function PrimaryRow({
   conditions,
   forecasts,
 }: {
-  weather?: string;
-  label: string;
+  weather?: number;
+  label?: string;
   img?: string;
   conditions?: string;
   forecasts?: Array<WeatherType>;

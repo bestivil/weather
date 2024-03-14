@@ -8,9 +8,9 @@ export default function BasicCard({
   img,
   conditions,
 }: {
-  weatherC: string | undefined;
+  weatherC: number | undefined;
   time?: string;
-  label: string;
+  label?: string;
   img?: string;
   conditions: string | undefined;
 }) {

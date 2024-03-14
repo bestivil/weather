@@ -6,10 +6,10 @@ import { Locations } from "./constants";
 import AC from "./components/AutoComplete";
 import fetchWeather from "./controllers/api";
 import { WeatherType } from "./types";
-import { findTimeSlot } from "./controllers/timing";
 import Favourites from "./components/Favourites";
 import CFToggle from "./components/toggle";
 import PrimaryRow from "./components/PrimaryRow";
+import SecondaryRow from "./components/SecondaryRow";
 
 const App = () => {
   const [location, setLocation] = useState(Locations[0]);
@@ -116,18 +116,18 @@ const App = () => {
           </button>
         </div>
 
-        <div className="mt-4">
+        <div className="m-4 items-center">
           <PrimaryRow
-            weather={"5"}
-            label="Temp"
+            weather={WeatherInstance?.Temp}
             img={`http://${WeatherInstance?.currTempImg?.slice(2) || ""}`}
             conditions={"Clear"}
             forecasts={WeatherInstance?.nextForecast}
           />
+          <SecondaryRow />
         </div>
         <div className="mt-4">
           <p className="m-5">Favourites</p>
-          <Favourites
+          <Favourites //change to favourites row
             fav={favouritesCards}
             handleRemove={handleRemove}
             currentLocationView={location}
