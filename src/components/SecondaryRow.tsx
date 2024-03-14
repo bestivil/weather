@@ -6,8 +6,6 @@ export default function SecondaryRow() {
   return (
     <Card
       sx={{
-        margin: "10px",
-        maxWidth: "99%",
         backgroundColor: "#E6E6E6",
         overflow: "hidden",
         borderRadius: 8,
