@@ -15,4 +15,6 @@ export type WeatherType = {
   windDir?: string;
   visibilityKM?: number;
   feelsLikeC?: number;
+  time?: string;
+  nextForecast?: Array<WeatherType>;
 };
