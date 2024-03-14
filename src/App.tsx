@@ -4,17 +4,16 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import { Locations } from "./constants";
 import AC from "./components/AutoComplete";
-import BasicCard from "./components/Card";
 import fetchWeather from "./controllers/api";
 import { WeatherType } from "./types";
 import { findTimeSlot } from "./controllers/timing";
 import Favourites from "./components/Favourites";
 import CFToggle from "./components/toggle";
+import PrimaryRow from "./components/PrimaryRow";
 
 const App = () => {
   const [location, setLocation] = useState(Locations[0]);
   const [WeatherInstance, setWeatherInstance] = useState<WeatherType>();
-  const [backgroundTime, setBackgroundTime] = useState<string>();
   const [favouritesCards, setfavouritesCards] = useState<String[] | null>(null);
   const [localStorageData, setLocalStorageData] = useState<string | null>(null);
   const [alignment, setAlignment] = useState("celsius");
@@ -60,17 +59,13 @@ const App = () => {
   };
 
   useEffect(() => {
-    const WeatherFunc = async () => {
-      // calls the API and sets WeatherInstance and Background time to base image.
+    const WeatherFetchFunction = async () => {
       const weatherData = await fetchWeather(location, setWeatherInstance);
       if (weatherData) {
         setWeatherInstance(weatherData);
-        setBackgroundTime(
-          findTimeSlot(weatherData?.datetime!.slice(-5).toString())
-        );
       }
     };
-    WeatherFunc();
+    WeatherFetchFunction();
   }, [location]);
 
   const handleAlignmentChange = (newAlignment: string) => {
@@ -81,7 +76,6 @@ const App = () => {
     <>
       <div
         style={{
-          backgroundImage: `url(${process.env.PUBLIC_URL}/assets/backgrounds/${backgroundTime}.jpg)`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           height: "100vh",
@@ -123,16 +117,12 @@ const App = () => {
         </div>
 
         <div className="mt-4">
-          <BasicCard
-            weather={WeatherInstance?.Temp}
-            label="Current Temperature"
+          <PrimaryRow
+            weather={"5"}
+            label="Temp"
             img={`http://${WeatherInstance?.currTempImg?.slice(2) || ""}`}
-            conditions={WeatherInstance?.Conditions}
-            wind={WeatherInstance?.wind}
-            precipMM={WeatherInstance?.precipMM}
-            windDir={WeatherInstance?.windDir}
-            vis_km={WeatherInstance?.visibilityKM}
-            feelsLike={WeatherInstance?.feelsLikeC}
+            conditions={"Clear"}
+            forecasts={WeatherInstance?.nextForecast}
           />
         </div>
         <div className="mt-4">
