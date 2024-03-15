@@ -2,22 +2,22 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
 const CFToggle = ({
-  alignment,
+  isCelsius,
   newAlignment,
 }: {
-  alignment: string;
-  newAlignment: (value: string) => void;
+  isCelsius: boolean;
+  newAlignment: (value: boolean) => void;
 }) => {
   return (
     <ToggleButtonGroup
       color="primary"
-      value={alignment}
-      onChange={(event, nextAlignment) => newAlignment(nextAlignment as string)}
+      value={isCelsius}
+      onChange={(event, nextAlignment) => newAlignment(nextAlignment)}
       exclusive
       sx={{ height: "10%" }}
     >
-      <ToggleButton value="celsius">Celsius</ToggleButton>
-      <ToggleButton value="farenheit">Farenheit</ToggleButton>
+      <ToggleButton value={true}>Celsius</ToggleButton>
+      <ToggleButton value={false}>Farenheit</ToggleButton>
     </ToggleButtonGroup>
   );
 };

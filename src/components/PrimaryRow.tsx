@@ -4,30 +4,28 @@ import BasicCard from "./Card";
 export default function PrimaryRow({
   weather,
   label,
-  img,
-  conditions,
   forecasts,
+  isCelsius,
 }: {
-  weather?: number;
+  weather?: WeatherType;
   label?: string;
-  img?: string;
-  conditions?: string;
   forecasts?: Array<WeatherType>;
+  isCelsius: boolean;
 }) {
   return (
     <>
       <div className="items-center flex flex-row justify-center m-2">
         <BasicCard
-          weatherC={weather}
+          weatherC={isCelsius ? weather?.TempC : weather?.TempF}
           label={label}
-          conditions={conditions}
+          conditions={weather?.Conditions}
           time="Now"
-          img={img || ""}
+          img={`http://${weather?.currTempImg?.slice(2) || ""}`}
         />
         {forecasts?.map((forecast: any, index: number) => {
           return (
             <BasicCard
-              weatherC={forecast.Temp}
+              weatherC={isCelsius ? forecast.TempC : forecast.TempF}
               label={label}
               img={`http://${forecast.currTempImg?.slice(2) || ""}`}
               conditions={forecast.Conditions}
