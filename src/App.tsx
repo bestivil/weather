@@ -29,6 +29,12 @@ const App = () => {
     setfavouritesCards(newData);
   }, [localStorageData]);
 
+  // Load the data from localstorage on first render
+  useEffect(() => {
+    const data = localStorage.getItem("FavouriteLocations");
+    setLocalStorageData(data);
+  }, []);
+
   const handleAddLocation = () => {
     //handling the adding
     const existingData = JSON.parse(localStorageData || "{}");
