@@ -37,13 +37,6 @@ const fetchWeather = async (
       Temp: firstHour.temp_c,
       currTempImg: firstHour.condition.icon,
       Conditions: firstHour.condition.text,
-      wind: firstHour.wind_mph,
-      feelslike: firstHour.feelslike_c,
-      datetime: firstHour.localtime,
-      precipMM: firstHour.precip_mm,
-      windDir: firstHour.wind_dir,
-      visibilityKM: firstHour.vis_km,
-      feelsLikeC: firstHour.feelslike_c,
       time: next3Hours[0],
     };
 
@@ -51,13 +44,6 @@ const fetchWeather = async (
       Temp: secondHour.temp_c,
       currTempImg: secondHour.condition.icon,
       Conditions: secondHour.condition.text,
-      wind: secondHour.wind_mph,
-      feelslike: secondHour.feelslike_c,
-      datetime: secondHour.localtime,
-      precipMM: secondHour.precip_mm,
-      windDir: secondHour.wind_dir,
-      visibilityKM: secondHour.vis_km,
-      feelsLikeC: secondHour.feelslike_c,
       time: next3Hours[1],
     };
 
@@ -65,13 +51,6 @@ const fetchWeather = async (
       Temp: thirdHour.temp_c,
       currTempImg: thirdHour.condition.icon,
       Conditions: thirdHour.condition.text,
-      wind: thirdHour.wind_mph,
-      feelslike: thirdHour.feelslike_c,
-      datetime: thirdHour.localtime,
-      precipMM: thirdHour.precip_mm,
-      windDir: thirdHour.wind_dir,
-      visibilityKM: thirdHour.vis_km,
-      feelsLikeC: thirdHour.feelslike_c,
       time: next3Hours[2],
     };
 
