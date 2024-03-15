@@ -14,6 +14,7 @@ const CFToggle = ({
       value={alignment}
       onChange={(event, nextAlignment) => newAlignment(nextAlignment as string)}
       exclusive
+      sx={{ height: "10%" }}
     >
       <ToggleButton value="celsius">Celsius</ToggleButton>
       <ToggleButton value="farenheit">Farenheit</ToggleButton>
