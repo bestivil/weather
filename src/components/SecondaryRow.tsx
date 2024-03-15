@@ -5,6 +5,7 @@ import CardContent from "@mui/material/CardContent";
 export default function SecondaryRow() {
   return (
     <Card
+      className="m-4"
       sx={{
         backgroundColor: "#E6E6E6",
         overflow: "hidden",
