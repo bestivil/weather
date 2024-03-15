@@ -5,15 +5,16 @@ export type LocationType = {
 
 export type WeatherType = {
   label?: string;
-  Temp?: number;
+  TempC: number;
+  TempF: number;
   Conditions?: string;
   wind?: number;
-  feelslike?: number;
+  feelslikeF?: number;
   datetime?: string;
   currTempImg?: string;
-  precipMM?: number;
+  rainfall?: number;
   windDir?: string;
-  visibilityKM?: number;
+  visibility?: number;
   feelsLikeC?: number;
   time?: string;
   nextForecast?: Array<WeatherType>;

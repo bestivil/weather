@@ -17,7 +17,7 @@ const App = () => {
   const [WeatherInstance, setWeatherInstance] = useState<WeatherType>();
   const [favouritesCards, setfavouritesCards] = useState<String[] | null>(null);
   const [localStorageData, setLocalStorageData] = useState<string | null>(null);
-  const [alignment, setAlignment] = useState("celsius");
+  const [isCelsius, setisCelsius] = useState(true);
 
   useEffect(() => {
     const items = JSON.parse(localStorageData || "{}");
@@ -75,10 +75,6 @@ const App = () => {
     WeatherFetchFunction();
   }, [location]);
 
-  const handleAlignmentChange = (newAlignment: string) => {
-    setAlignment(newAlignment);
-  };
-
   return (
     <>
       <div
@@ -97,22 +93,25 @@ const App = () => {
             <AC locSelected={location} onSelectedClick={setLocation} />
           </div>
           <div className="translate-x-[48px]">
-            <CFToggle
-              alignment={alignment}
-              newAlignment={handleAlignmentChange}
-            />
+            <CFToggle isCelsius={isCelsius} newAlignment={setisCelsius} />
           </div>
           <FavIcon location={location} onSelectedClick={handleAddLocation} />
         </div>
 
         <div className="m-2 items-center">
           <PrimaryRow
-            weather={WeatherInstance?.Temp}
-            img={`http://${WeatherInstance?.currTempImg?.slice(2) || ""}`}
-            conditions={"Clear"}
+            weather={WeatherInstance}
             forecasts={WeatherInstance?.nextForecast}
+            isCelsius={isCelsius}
           />
-          <SecondaryRow />
+          <SecondaryRow
+            weather={WeatherInstance}
+            feels_like={
+              isCelsius
+                ? WeatherInstance?.feelsLikeC
+                : WeatherInstance?.feelslikeF
+            }
+          />
         </div>
         <div className="">
           <p className="ml-8 mt-4 text-white">Favourites</p>

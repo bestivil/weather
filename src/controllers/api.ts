@@ -14,15 +14,16 @@ const fetchWeather = async (
     const json = await response.json();
 
     const weatherData: WeatherType = {
-      Temp: json.current.temp_c,
+      TempC: json.current.temp_c,
+      TempF: json.current.temp_f,
       currTempImg: json.current.condition.icon,
       Conditions: json.current.condition.text,
       wind: json.current.wind_mph,
-      feelslike: json.current.feelslike_c,
+      feelslikeF: json.current.feelslike_f,
       datetime: json.location.localtime,
-      precipMM: json.current.precip_mm,
+      rainfall: json.current.precip_mm,
       windDir: json.current.wind_dir,
-      visibilityKM: json.current.vis_km,
+      visibility: json.current.vis_km,
       feelsLikeC: json.current.feelslike_c,
       time: json.current.last_updated,
     };
@@ -34,21 +35,24 @@ const fetchWeather = async (
     const thirdHour = json.forecast.forecastday[0].hour[next3Hours[2]];
 
     const weatherDataNext1Hr: WeatherType = {
-      Temp: firstHour.temp_c,
+      TempC: firstHour.temp_c,
+      TempF: firstHour.temp_f,
       currTempImg: firstHour.condition.icon,
       Conditions: firstHour.condition.text,
       time: next3Hours[0],
     };
 
     const weatherDataNext2Hr: WeatherType = {
-      Temp: secondHour.temp_c,
+      TempC: secondHour.temp_c,
+      TempF: secondHour.temp_f,
       currTempImg: secondHour.condition.icon,
       Conditions: secondHour.condition.text,
       time: next3Hours[1],
     };
 
     const weatherDataNext3Hr: WeatherType = {
-      Temp: thirdHour.temp_c,
+      TempC: thirdHour.temp_c,
+      TempF: thirdHour.temp_f,
       currTempImg: thirdHour.condition.icon,
       Conditions: thirdHour.condition.text,
       time: next3Hours[2],
@@ -59,6 +63,8 @@ const fetchWeather = async (
       weatherDataNext2Hr,
       weatherDataNext3Hr,
     ];
+
+    console.log(weatherDataNext1Hr.TempF);
     setWeatherInstance(weatherData);
 
     return weatherData;

@@ -1,8 +1,15 @@
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
+import { WeatherType } from "../types";
 
-export default function SecondaryRow() {
+export default function SecondaryRow({
+  feels_like,
+  weather,
+}: {
+  feels_like: number | undefined;
+  weather: WeatherType | undefined;
+}) {
   return (
     <Card
       className="m-4"
@@ -32,7 +39,7 @@ export default function SecondaryRow() {
               <path d="m0 0h32v32h-32z" fill="none" />
             </svg>
             <p className="mt-2 relative">
-              <span className="font-bold text-sm z-10"></span>
+              <span className="font-bold text-sm z-10">{feels_like}</span>
               <span className="text-sm font-bold absolute top-0 right-0 -mr-2 -mt-1">
                 °
               </span>
@@ -63,13 +70,15 @@ export default function SecondaryRow() {
                     stroke-width="0.6px"
                     alignment-baseline="middle"
                     fontSize="6"
-                  ></text>
+                  >
+                    {weather?.windDir}
+                  </text>
                 </symbol>
               </defs>
               <use fill="#FFF" className="wr-wind-type-wind" href="#a" />
             </svg>
 
-            <p className="font-bold text-sm z-10">mph</p>
+            <p className="font-bold text-sm z-10">{weather?.wind} mph</p>
           </div>
 
           <div className="flex flex-col items-center ">
@@ -129,7 +138,9 @@ export default function SecondaryRow() {
                 </g>
               </g>
             </svg>
-            <p className="font-bold text-sm z-10 mt-2"> mm</p>
+            <p className="font-bold text-sm z-10 mt-2">
+              {weather?.rainfall} mm
+            </p>
           </div>
           <div className="flex flex-col items-center">
             <p className="text-[10px]">Visibility</p>
@@ -163,7 +174,9 @@ export default function SecondaryRow() {
                 </g>
               </g>
             </svg>
-            <p className="font-bold text-sm z-10 mt-1">km</p>
+            <p className="font-bold text-sm z-10 mt-1">
+              {weather?.visibility} km
+            </p>
           </div>
         </div>
       </CardContent>
