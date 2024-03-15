@@ -17,10 +17,7 @@ export default function AC({ locSelected, onSelectedClick }: LocationType) {
       sx={{ width: 300 }}
       value={locSelected}
       renderInput={(params) => (
-        <TextField
-          {...params}
-          sx={{ input: { height: "10%", color: "white" } }}
-        />
+        <TextField {...params} sx={{ input: { height: "10%" } }} />
       )}
       onChange={handleClick}
     />
