@@ -5,18 +5,37 @@ const Favourites = ({
   handleRemove,
   handleAdd,
   currentLocationView,
+  localStorageData,
+  setLocalStorageData,
 }: {
   fav: String[] | null;
   currentLocationView: string;
   handleRemove: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  handleAdd: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  handleAdd?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  localStorageData: string | null;
+  setLocalStorageData: (value: string) => void;
 }) => {
+  const handleAddLocation = () => {
+    const existingData = JSON.parse(localStorageData || "{}");
+
+    const currentKeys = Object.keys(existingData);
+    const nextKey =
+      currentKeys.length === 0 ? 0 : Math.max(...currentKeys.map(Number)) + 1; //gets the next [key] value to append to end of localstorage array
+
+    const newData = JSON.stringify({
+      ...existingData,
+      [nextKey]: currentLocationView,
+    });
+    localStorage.setItem("FavouriteLocations", newData);
+
+    setLocalStorageData(newData);
+  };
   return (
     <>
       <div>
         {fav?.length === 0 ? (
           <div className="flex m-4 ml-10 mb-1 rounded-md">
-            <button onClick={handleAdd}>
+            <button onClick={handleAddLocation}>
               <Card
                 sx={{
                   height: 150,

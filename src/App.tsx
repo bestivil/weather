@@ -3,14 +3,12 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import { Locations } from "./constants";
-import AC from "./components/AutoComplete";
 import fetchWeather from "./controllers/api";
 import { WeatherType } from "./types";
 import Favourites from "./components/Favourites";
-import CFToggle from "./components/toggle";
 import PrimaryRow from "./components/PrimaryRow";
 import SecondaryRow from "./components/SecondaryRow";
-import FavIcon from "./components/FavIcon";
+import NavBar from "./components/NavBar";
 
 const App = () => {
   const [location, setLocation] = useState(Locations[0]);
@@ -34,20 +32,6 @@ const App = () => {
     const data = localStorage.getItem("FavouriteLocations");
     setLocalStorageData(data);
   }, []);
-
-  const handleAddLocation = () => {
-    //handling the adding
-    const existingData = JSON.parse(localStorageData || "{}");
-
-    const currentKeys = Object.keys(existingData);
-    const nextKey =
-      currentKeys.length === 0 ? 0 : Math.max(...currentKeys.map(Number)) + 1; //gets the next [key] value to append to end of localstorage array
-
-    const newData = JSON.stringify({ ...existingData, [nextKey]: location });
-    localStorage.setItem("FavouriteLocations", newData);
-
-    setLocalStorageData(newData);
-  };
 
   const handleRemove = (e: React.MouseEvent<HTMLButtonElement>) => {
     const existingData = JSON.parse(localStorageData || "{}");
@@ -88,15 +72,14 @@ const App = () => {
           marginTop: "-0px",
         }}
       >
-        <div className=" flex items-center flex-row h-[196px] m-4 rounded-full bg-[#E6E6E6]">
-          <div className="translate-x-[36px]">
-            <AC locSelected={location} onSelectedClick={setLocation} />
-          </div>
-          <div className="translate-x-[48px]">
-            <CFToggle isCelsius={isCelsius} newAlignment={setisCelsius} />
-          </div>
-          <FavIcon location={location} onSelectedClick={handleAddLocation} />
-        </div>
+        <NavBar
+          location={location}
+          setLocation={setLocation}
+          localStorageData={localStorageData}
+          setLocalStorageData={setLocalStorageData}
+          isCelsius={isCelsius}
+          setisCelsius={setisCelsius}
+        />
 
         <div className="m-2 items-center">
           <PrimaryRow
@@ -120,7 +103,8 @@ const App = () => {
             fav={favouritesCards}
             handleRemove={handleRemove}
             currentLocationView={location}
-            handleAdd={handleAddLocation}
+            localStorageData={localStorageData}
+            setLocalStorageData={setLocalStorageData}
           />
         </div>
       </div>
