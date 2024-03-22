@@ -3,7 +3,7 @@ import getNextThreeHours from "./Next3Hours";
 
 const fetchWeather = async (
   location: string,
-  setWeatherInstance: (weather: WeatherType) => void
+  setWeatherInstance?: (weather: WeatherType) => void
 ) => {
   try {
     const response = await fetch(
@@ -64,8 +64,9 @@ const fetchWeather = async (
       weatherDataNext3Hr,
     ];
 
-    console.log(weatherDataNext1Hr.TempF);
-    setWeatherInstance(weatherData);
+    if (setWeatherInstance) {
+      setWeatherInstance(weatherData!);
+    }
 
     return weatherData;
   } catch (error) {

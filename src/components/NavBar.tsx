@@ -19,7 +19,7 @@ export default function NavBar({
 }) {
   const handleAddLocation = () => {
     //handling the adding
-    const existingData = JSON.parse(localStorageData || "{}");
+    const existingData = JSON.parse(localStorage.getItem("FavouriteLocations") || "{}");
 
     const currentKeys = Object.keys(existingData);
     const nextKey =
