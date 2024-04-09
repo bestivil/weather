@@ -23,33 +23,28 @@ const App = () => {
 
   useEffect(() => {
     const fetchAllFavouritesWeather = async () => {
-      // Attempt to parse the localStorage data or default to an empty array
       const favLocationsRaw = localStorage.getItem("FavouriteLocations");
       let favLocations = [] as any[];
       try {
         const parsedData = JSON.parse(favLocationsRaw || "{}");
-        // Convert object to array
         favLocations =(Object.values(parsedData));
       } catch (error) {
         console.error('Error parsing favorite locations from localStorage:', error);
-        favLocations = []; // Default to an empty array in case of error
+        favLocations = []; 
       }
   
-      // Ensure favLocations is an array
       if (!Array.isArray(favLocations)) {
         console.warn('FavouriteLocations is not an array:', favLocations);
-        favLocations = []; // Default to an empty array if it's not an array
+        favLocations = []; // Default to an empty array
       }
   
       const weatherDataPromises = favLocations.map(async (location) => {
         try {
-          // Here we use the fetchWeather directly and wait for its result
           const weatherData = await fetchWeather(location, () => {});
-          // Assuming TempC is the weather data you want; adjust as necessary
           return { name: location, weather: weatherData?.TempC };
         } catch (error) {
           console.error('Error fetching weather for location:', location, error);
-          return null; // Return null for failed requests
+          return null;
         }
       });
   

@@ -21,7 +21,7 @@ const Favourites = ({
 
     const currentKeys = Object.keys(existingData);
     const nextKey =
-      currentKeys.length === 0 ? 0 : Math.max(...currentKeys.map(Number)) + 1; //gets the next [key] value to append to end of localstorage array
+      currentKeys.length === 0 ? 0 : Math.max(...currentKeys.map(Number)) + 1; 
 
     const newData = JSON.stringify({
       ...existingData,
