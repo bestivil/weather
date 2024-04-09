@@ -1,5 +1,3 @@
-/* eslint-disable react/button-has-type */
-// <reference path="path/types.d.ts" />
 import "./App.css";
 import { useEffect, useState } from "react";
 import { Locations } from "./constants";
@@ -10,28 +8,62 @@ import PrimaryRow from "./components/PrimaryRow";
 import SecondaryRow from "./components/SecondaryRow";
 import NavBar from "./components/NavBar";
 
+
+export interface FavouriteCard {
+  name: string;
+  weather: number;
+}
+
 const App = () => {
   const [location, setLocation] = useState(Locations[0]);
   const [WeatherInstance, setWeatherInstance] = useState<WeatherType>();
-  const [favouritesCards, setfavouritesCards] = useState<String[] | null>(null);
+  const [favouritesCards, setfavouritesCards] = useState<FavouriteCard[] | null>(null);;
   const [localStorageData, setLocalStorageData] = useState<string | null>(null);
   const [isCelsius, setisCelsius] = useState(true);
 
   useEffect(() => {
-    const items = JSON.parse(localStorageData || "{}");
-    const newData: string[] = [];
-    Object.keys(items).forEach((key) => {
-      newData.push(items[key as keyof typeof items]);
-    });
+    const fetchAllFavouritesWeather = async () => {
+      // Attempt to parse the localStorage data or default to an empty array
+      const favLocationsRaw = localStorage.getItem("FavouriteLocations");
+      let favLocations = [] as any[];
+      try {
+        const parsedData = JSON.parse(favLocationsRaw || "{}");
+        // Convert object to array
+        favLocations =(Object.values(parsedData));
+      } catch (error) {
+        console.error('Error parsing favorite locations from localStorage:', error);
+        favLocations = []; // Default to an empty array in case of error
+      }
+  
+      // Ensure favLocations is an array
+      if (!Array.isArray(favLocations)) {
+        console.warn('FavouriteLocations is not an array:', favLocations);
+        favLocations = []; // Default to an empty array if it's not an array
+      }
+  
+      const weatherDataPromises = favLocations.map(async (location) => {
+        try {
+          // Here we use the fetchWeather directly and wait for its result
+          const weatherData = await fetchWeather(location, () => {});
+          // Assuming TempC is the weather data you want; adjust as necessary
+          return { name: location, weather: weatherData?.TempC };
+        } catch (error) {
+          console.error('Error fetching weather for location:', location, error);
+          return null; // Return null for failed requests
+        }
+      });
+  
+      const weatherDataArray = await Promise.all(weatherDataPromises);
+      const validWeatherData = weatherDataArray.filter((data): data is FavouriteCard => data !== null);
+      console.log('Valid weather data:', validWeatherData);
+      setfavouritesCards(validWeatherData);
 
-    setfavouritesCards(newData);
+    };
+  
+    fetchAllFavouritesWeather();
   }, [localStorageData]);
 
-  // Load the data from localstorage on first render
-  useEffect(() => {
-    const data = localStorage.getItem("FavouriteLocations");
-    setLocalStorageData(data);
-  }, []);
+  
 
   const handleRemove = (e: React.MouseEvent<HTMLButtonElement>) => {
     const existingData = JSON.parse(localStorageData || "{}");
@@ -99,7 +131,7 @@ const App = () => {
         <div className="">
           <p className="ml-8 mt-4 text-white">Favourites</p>
 
-          <Favourites //change to favourites row
+          <Favourites
             fav={favouritesCards}
             handleRemove={handleRemove}
             currentLocationView={location}
