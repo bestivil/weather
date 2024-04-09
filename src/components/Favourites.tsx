@@ -1,4 +1,5 @@
 import { Card, CardActions, CardContent } from "@mui/material";
+import { FavouriteCard } from "../App";
 
 const Favourites = ({
   fav,
@@ -8,7 +9,7 @@ const Favourites = ({
   localStorageData,
   setLocalStorageData,
 }: {
-  fav: String[] | null;
+  fav: FavouriteCard[] | null;
   currentLocationView: string;
   handleRemove: (e: React.MouseEvent<HTMLButtonElement>) => void;
   handleAdd?: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -20,7 +21,7 @@ const Favourites = ({
 
     const currentKeys = Object.keys(existingData);
     const nextKey =
-      currentKeys.length === 0 ? 0 : Math.max(...currentKeys.map(Number)) + 1; //gets the next [key] value to append to end of localstorage array
+      currentKeys.length === 0 ? 0 : Math.max(...currentKeys.map(Number)) + 1; 
 
     const newData = JSON.stringify({
       ...existingData,
@@ -105,8 +106,8 @@ const Favourites = ({
                   </button>
                 </div>
                 <CardContent>
-                  <div className="text-center bg-opacity-80">{item}</div>
-                  <div className="text-center"></div>
+                  <div className="text-center bg-opacity-80">{item.name}</div>
+                  <div className="text-center">{item.weather}</div>
                 </CardContent>
                 <CardActions></CardActions>
               </Card>

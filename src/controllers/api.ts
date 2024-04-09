@@ -64,7 +64,7 @@ const fetchWeather = async (
       weatherDataNext3Hr,
     ];
 
-    console.log(weatherDataNext1Hr.TempF);
+    
     setWeatherInstance(weatherData);
 
     return weatherData;
