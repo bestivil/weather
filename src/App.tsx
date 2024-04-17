@@ -12,6 +12,7 @@ import NavBar from "./components/NavBar";
 export interface FavouriteCard {
   name: string;
   weather: number;
+  weatherF: number;
 }
 
 const App = () => {
@@ -41,7 +42,7 @@ const App = () => {
       const weatherDataPromises = favLocations.map(async (location) => {
         try {
           const weatherData = await fetchWeather(location, () => {});
-          return { name: location, weather: weatherData?.TempC };
+          return { name: location, weather: weatherData?.TempC, weatherF: weatherData?.TempF};
         } catch (error) {
           console.error('Error fetching weather for location:', location, error);
           return null;
@@ -124,7 +125,7 @@ const App = () => {
           />
         </div>
         <div className="">
-          <p className="ml-8 mt-4 text-white">Favourites</p>
+          <p className="ml-8 mt-4 text-neutral-200">Favourites</p>
 
           <Favourites
             fav={favouritesCards}
@@ -132,6 +133,7 @@ const App = () => {
             currentLocationView={location}
             localStorageData={localStorageData}
             setLocalStorageData={setLocalStorageData}
+            CF = {isCelsius}
           />
         </div>
       </div>
