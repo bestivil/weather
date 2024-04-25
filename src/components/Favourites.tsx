@@ -8,6 +8,7 @@ const Favourites = ({
   currentLocationView,
   localStorageData,
   setLocalStorageData,
+  CF,
 }: {
   fav: FavouriteCard[] | null;
   currentLocationView: string;
@@ -15,6 +16,7 @@ const Favourites = ({
   handleAdd?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   localStorageData: string | null;
   setLocalStorageData: (value: string) => void;
+  CF: boolean;
 }) => {
   const handleAddLocation = () => {
     const existingData = JSON.parse(localStorageData || "{}");
@@ -61,7 +63,7 @@ const Favourites = ({
                   </svg>
                 </div>
                 <CardContent>
-                  <div className="text-center bg-opacity-80">
+                  <div className="text-center bg-opacity-80 text-neutral-200">
                     Add {currentLocationView} to Favourites
                   </div>
                   <div className="text-center"></div>
@@ -106,8 +108,13 @@ const Favourites = ({
                   </button>
                 </div>
                 <CardContent>
-                  <div className="text-center bg-opacity-80">{item.name}</div>
-                  <div className="text-center">{item.weather}</div>
+                  <div className=" ml-[35%] text-neutral-200 ">{item.name}</div>
+                  <p className="font-bold relative text-center mt-6">
+                  <span className="text-center text-5xl text-neutral-200">{CF ? item.weather : item.weatherF}</span>
+                  <span className="text-sm absolute -mt-2 ml-0.5 text-neutral-200">
+                    °
+                  </span>
+                  </p>
                 </CardContent>
                 <CardActions></CardActions>
               </Card>
