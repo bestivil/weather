@@ -7,22 +7,27 @@ export default function BasicCard({
   label,
   img,
   conditions,
+  className = "",
 }: {
   weatherC: number | undefined;
   time?: string;
   label?: string;
   img?: string;
   conditions: string | undefined;
+  className?: string;
 }) {
   return (
     <>
       <Card
-        className="w-72 h-65 m-3"
+        className="{w-72 h-65 m-3 ${className}`}"
         sx={{
           backgroundColor: "#E6E6E6",
           overflow: "hidden",
           borderRadius: 8,
           boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+          minWidth: "18rem", 
+          width: "100%",
+          
         }}
       >
         <CardContent>

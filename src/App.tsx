@@ -109,7 +109,7 @@ const App = () => {
           setisCelsius={setisCelsius}
         />
 
-        <div className="m-2 items-center">
+        <div className="items-center w-full">
           <PrimaryRow
             weather={WeatherInstance}
             forecasts={WeatherInstance?.nextForecast}
@@ -124,8 +124,7 @@ const App = () => {
             }
           />
         </div>
-        <div className="">
-          <p className="ml-8 mt-4 text-neutral-200">Favourites</p>
+        
 
           <Favourites
             fav={favouritesCards}
@@ -136,7 +135,7 @@ const App = () => {
             CF = {isCelsius}
           />
         </div>
-      </div>
+   
     </>
   );
 };
