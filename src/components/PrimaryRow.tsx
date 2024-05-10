@@ -13,28 +13,30 @@ export default function PrimaryRow({
   isCelsius: boolean;
 }) {
   return (
-    <>
-      <div className="items-center flex flex-row justify-center m-2">
+      <div className="flex flex-wrap justify-center gap-4 m-2">
+        <div className="w-full sm:w-full md:w-1/3 lg:w-1/6 flex-grow flex">
         <BasicCard
           weatherC={isCelsius ? weather?.TempC : weather?.TempF}
           label={label}
           conditions={weather?.Conditions}
           time="Now"
           img={`http://${weather?.currTempImg?.slice(2) || ""}`}
+          className="max-w-full"
         />
-        {forecasts?.map((forecast: any, index: number) => {
-          return (
-            <BasicCard
-              weatherC={isCelsius ? forecast.TempC : forecast.TempF}
-              label={label}
-              img={`http://${forecast.currTempImg?.slice(2) || ""}`}
-              conditions={forecast.Conditions}
-              time={forecast.time}
-              key={index}
-            />
-          );
-        })}
-      </div>
-    </>
+        </div>
+        
+        {forecasts?.map((forecast: any, index: number) => (
+        <div className="w-full sm:w-full md:w-1/3 lg:w-1/6 flex-grow flex" key={index}>
+          <BasicCard
+            weatherC={isCelsius ? forecast.TempC : forecast.TempF}
+            label={label}
+            img={`http://${forecast.currTempImg?.slice(2) || ""}`}
+            conditions={forecast.Conditions}
+            time={forecast.time}
+            className="max-w-full"
+          />
+        </div>
+      ))}
+    </div>
   );
 }

@@ -32,7 +32,7 @@ export default function NavBar({
   };
   return (
     <>
-      <div className=" flex items-center flex-row h-[196px] m-4 rounded-full bg-[#E6E6E6]">
+      <div className=" flex flex-wrap items-center flex-row h-[10%] m-4 rounded-full bg-[#E6E6E6]">
         <div className="translate-x-[36px]">
           <AC locSelected={location} onSelectedClick={setLocation} />
         </div>
