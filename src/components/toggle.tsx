@@ -4,9 +4,11 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 const CFToggle = ({
   isCelsius,
   newAlignment,
+  className,
 }: {
   isCelsius: boolean;
-  newAlignment: (value: boolean) => void;
+  newAlignment: (newAlignment: boolean) => void;
+  className?: string;
 }) => {
   return (
     <ToggleButtonGroup
@@ -15,6 +17,7 @@ const CFToggle = ({
       onChange={(event, nextAlignment) => newAlignment(nextAlignment)}
       exclusive
       sx={{ height: "10%" }}
+      className={className}
     >
       <ToggleButton value={true}>Celsius</ToggleButton>
       <ToggleButton value={false}>Farenheit</ToggleButton>

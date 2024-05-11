@@ -3,21 +3,23 @@ import { SyntheticEvent } from "react";
 export default function FavIcon({
   location,
   onSelectedClick,
+  className,
 }: {
   location: string;
   onSelectedClick: (event: SyntheticEvent<HTMLButtonElement>) => void;
+  className?: string;
 }) {
   return (
     <button
-      className={` bg-white-200 rounded-lg flex p-[20px] bk-icon ml-auto ring-black translate-x-4 ${
+      className={` bg-white-200 rounded-lg flex bk-icon  ring-black ${
         location === localStorage.getItem("Fav") //TODO: colouring display from localStorage
           ? `fill-yellow-300`
           : `hover:fill-yellow-300`
-      } hover:duration-50  translate-x-24`}
+      } hover:duration-50  ${className}`}
       onClick={onSelectedClick}
     >
       <svg
-        className="mr-[19px]"
+        className=""
         height="24"
         width="24"
         viewBox="0 0 24 24"
