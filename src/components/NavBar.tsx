@@ -1,6 +1,8 @@
 import AC from "./AutoComplete";
 import FavIcon from "./FavIcon";
 import CFToggle from "./toggle";
+import { slide as Menu } from 'react-burger-menu'
+import { styles } from '../helpers/burger-icon-styles'
 
 export default function NavBar({
   location,
@@ -32,15 +34,20 @@ export default function NavBar({
   };
   return (
     <>
-      <div className=" flex flex-wrap items-center flex-row h-[10%] m-4 rounded-full bg-[#E6E6E6]">
-        <div className="translate-x-[36px]">
-          <AC locSelected={location} onSelectedClick={setLocation} />
-        </div>
-        <div className="translate-x-[48px]">
-          <CFToggle isCelsius={isCelsius} newAlignment={setisCelsius} />
+      
+      <div className="w-full flex items-center justify-between rounded-full bg-[#E6E6E6] p-2 pr-6 md:pr-10 m-4 relative">
+        
+        <div className="flex-grow flex items-center justify-center space-x-4">
+          <div className="">
+          <AC className="w-[250px]" locSelected={location} onSelectedClick={setLocation} />
+          </div>
+          <div className="hidden md:block">
+          <CFToggle isCelsius={isCelsius} newAlignment={setisCelsius} className="hidden sm:block" />
+          </div>
         </div>
         <FavIcon location={location} onSelectedClick={handleAddLocation} />
       </div>
+      
     </>
   );
 }

@@ -32,7 +32,7 @@ export default function PrimaryRow({
             label={label}
             img={`http://${forecast.currTempImg?.slice(2) || ""}`}
             conditions={forecast.Conditions}
-            time={forecast.time}
+            time={forecast.time + ":00"}
             className="max-w-full"
           />
         </div>

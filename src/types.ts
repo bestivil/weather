@@ -1,6 +1,7 @@
 export type LocationType = {
   locSelected: string;
   onSelectedClick: (alignment: any) => void;
+  className?: string;
 };
 
 export type WeatherType = {
