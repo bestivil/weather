@@ -71,7 +71,7 @@ const App = () => {
     fetchAllFavouritesWeather();
   }, [localStorageData]);
 
-  
+
 
   const handleRemove = (e: React.MouseEvent<HTMLButtonElement>) => {
     const existingData = JSON.parse(localStorageData || "{}");
@@ -101,8 +101,16 @@ const App = () => {
 
   
 
+  
+  
+    
+
+  
+
   return (
     <>
+      
+
       <div className="block md:hidden">
         <Menu id="burger-menu" styles={styles}>
           <div className="h-screen flex flex-col">

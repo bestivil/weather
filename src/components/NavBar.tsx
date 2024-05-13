@@ -3,6 +3,8 @@ import FavIcon from "./FavIcon";
 import CFToggle from "./toggle";
 import { slide as Menu } from 'react-burger-menu'
 import { styles } from '../helpers/burger-icon-styles'
+import { useEffect, useState } from "react";
+import { getAutocompleteData } from "../controllers/api";
 
 export default function NavBar({
   location,
@@ -18,7 +20,11 @@ export default function NavBar({
   setisCelsius: (value: boolean) => void;
   localStorageData: string | null;
   setLocalStorageData: (value: string) => void;
+
 }) {
+  const [autocompleteData, setAutocompleteData] = useState<string>("");
+  const [citySearchArray, setCitySearchArray] = useState<string[]>([]);
+  
   const handleAddLocation = () => {
     //handling the adding
     const existingData = JSON.parse(localStorageData || "{}");
@@ -31,7 +37,18 @@ export default function NavBar({
     localStorage.setItem("FavouriteLocations", newData);
 
     setLocalStorageData(newData);
+
   };
+  useEffect(() => {
+    const getACInputs = async () => {
+      const weatherDataAC = await getAutocompleteData(autocompleteData, setAutocompleteData);
+      if (weatherDataAC) {
+        setCitySearchArray(weatherDataAC);
+      }
+    };
+    getACInputs();
+  }, [autocompleteData]);
+
   return (
     <>
       
@@ -39,7 +56,7 @@ export default function NavBar({
         
         <div className="flex-grow flex items-center justify-center space-x-4">
           <div className="">
-          <AC className="w-[250px]" locSelected={location} onSelectedClick={setLocation} />
+          <AC className="w-[250px]" locSelected={location} onSelectedClick={setLocation} onChangeTypedValue={setAutocompleteData} citySearch={citySearchArray}  />
           </div>
           <div className="hidden md:block">
           <CFToggle isCelsius={isCelsius} newAlignment={setisCelsius} className="hidden sm:block" />
