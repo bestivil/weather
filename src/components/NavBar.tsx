@@ -13,6 +13,7 @@ export default function NavBar({
   setisCelsius,
   localStorageData,
   setLocalStorageData,
+  setisConnected,
 }: {
   location: string;
   setLocation: (value: string) => void;
@@ -20,6 +21,7 @@ export default function NavBar({
   setisCelsius: (value: boolean) => void;
   localStorageData: string | null;
   setLocalStorageData: (value: string) => void;
+  setisConnected: (value: boolean) => void;
 
 }) {
   const [autocompleteData, setAutocompleteData] = useState<string>("");
@@ -44,6 +46,9 @@ export default function NavBar({
       const weatherDataAC = await getAutocompleteData(autocompleteData, setAutocompleteData);
       if (weatherDataAC) {
         setCitySearchArray(weatherDataAC);
+      }
+      else {
+        setisConnected(false);
       }
     };
     getACInputs();

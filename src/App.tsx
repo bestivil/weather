@@ -27,6 +27,9 @@ const App = () => {
   const [favouritesCards, setfavouritesCards] = useState<FavouriteCard[] | null>(null);;
   const [localStorageData, setLocalStorageData] = useState<string | null>(null);
   const [isCelsius, setisCelsius] = useState(true);
+  const [isConnected, setisConnected] = useState(true);
+
+  let bgName = " ";
 
   const handleAlignment = (newAlignment: boolean) => {
     if (newAlignment !== null) { 
@@ -95,10 +98,19 @@ const App = () => {
       if (weatherData) {
         setWeatherInstance(weatherData);
       }
+      else {
+        setisConnected(false);
+      }
     };
     WeatherFetchFunction();
   }, [location]);
 
+  if (!isConnected) {
+    bgName = "bg-slate-800 h-screen"
+  }
+  else {
+    bgName = "bg-slate-800 sm:h-full xl:h-screen"
+  }
   
 
   
@@ -109,8 +121,6 @@ const App = () => {
 
   return (
     <>
-      
-
       <div className="block md:hidden">
         <Menu id="burger-menu" styles={styles}>
           <div className="h-screen flex flex-col">
@@ -122,7 +132,7 @@ const App = () => {
       
 
       <div
-        className="bg-slate-800 sm:h-full xl:h-screen"
+        className = {bgName}
         style={{
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -140,9 +150,11 @@ const App = () => {
           setLocalStorageData={setLocalStorageData}
           isCelsius={isCelsius}
           setisCelsius={setisCelsius}
+          setisConnected={setisConnected}
         />
         </div>
         
+        {isConnected ?
         <Favourites
             fav={favouritesCards}
             handleRemove={handleRemove}
@@ -150,7 +162,7 @@ const App = () => {
             localStorageData={localStorageData}
             setLocalStorageData={setLocalStorageData}
             CF = {isCelsius}
-          />
+          /> : null}
         
 
         <div className="items-center w-full">
@@ -158,7 +170,9 @@ const App = () => {
             weather={WeatherInstance}
             forecasts={WeatherInstance?.nextForecast}
             isCelsius={isCelsius}
+            isConnected={isConnected}
           />
+          {isConnected ?
           <SecondaryRow
             weather={WeatherInstance}
             feels_like={
@@ -166,7 +180,7 @@ const App = () => {
                 ? WeatherInstance?.feelsLikeC
                 : WeatherInstance?.feelslikeF
             }
-          />
+          /> : null}
         </div>
         </div>
    

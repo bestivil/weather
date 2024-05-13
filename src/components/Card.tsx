@@ -8,6 +8,7 @@ export default function BasicCard({
   img,
   conditions,
   className = "",
+  isConnected
 }: {
   weatherC: number | undefined;
   time?: string;
@@ -15,7 +16,9 @@ export default function BasicCard({
   img?: string;
   conditions: string | undefined;
   className?: string;
+  isConnected?: boolean;
 }) {
+  
   return (
     <>
       <Card
@@ -31,6 +34,7 @@ export default function BasicCard({
         }}
       >
         <CardContent>
+          {isConnected ?
           <div>
             <p className="text-center font-bold text-lg">{time}</p>
             <div className="flex flex-col items-center text-center">
@@ -47,7 +51,10 @@ export default function BasicCard({
               </p>
               <p className="font-light text-sm mt-2">{conditions}</p>
             </div>
-          </div>
+          </div> :
+          <div className="text-center">
+            <p className="text-center font-bold text-lg">No Connection</p>
+          </div>}
         </CardContent>
       </Card>
     </>
