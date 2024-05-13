@@ -1,7 +1,9 @@
 export type LocationType = {
   locSelected: string;
   onSelectedClick: (alignment: any) => void;
+  onChangeTypedValue: (value: string) => void;
   className?: string;
+  citySearch: string[];
 };
 
 export type WeatherType = {

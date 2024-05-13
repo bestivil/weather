@@ -74,3 +74,21 @@ const fetchWeather = async (
 };
 
 export default fetchWeather;
+
+export const getAutocompleteData = async (
+  location: string | null,
+  setWeatherData2: (weather: string) => void
+) => {
+  try {
+    const response = await fetch(
+      "http://api.weatherapi.com/v1/search.json?key=b471c1780bd24c85ad5190222232012&q= " + location + "&aqi=no"
+    )
+    const json = await response.json();
+
+    return json.map((item: any) => item.name);
+  
+  }
+    
+    catch (error) {
+      console.error("Error fetching weather data:", error);
+    }}
