@@ -7,7 +7,7 @@ const fetchWeather = async (
 ) => {
   try {
     const response = await fetch(
-      "http://api.weatherapi.com/v1/d=forecast.json?key=b471c1780bd24c85ad5190222232012&q=" +
+      "https://api.weatherapi.com/v1/d=forecast.json?key=b471c1780bd24c85ad5190222232012&q=" +
         location +
         "&aqi=no"
     );
@@ -81,7 +81,7 @@ export const getAutocompleteData = async (
 ) => {
   try {
     const response = await fetch(
-      "http://api.weatherapi.com/v1/search.json?key=b471c1780bd24c85ad5190222232012&q= " + location + "&aqi=no"
+      "https://api.weatherapi.com/v1/search.json?key=b471c1780bd24c85ad5190222232012&q= " + location + "&aqi=no"
     )
     const json = await response.json();
 
