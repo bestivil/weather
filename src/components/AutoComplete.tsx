@@ -12,7 +12,7 @@ export default function AC({ locSelected, onSelectedClick, className, onChangeTy
   onChangeTypedValue: (value: string) => void;
   className?: string; // used for tailwind
   citySearch: string[];}) {
-
+ 
   
 
  
@@ -35,6 +35,7 @@ export default function AC({ locSelected, onSelectedClick, className, onChangeTy
       className={className}
       autoHighlight
       id="location-combo-box"
+      value={locSelected}
       options={citySearch.length > 0 ? citySearch : Locations2}
       renderInput={(params) => (
         <TextField {...params} sx={{ input: { height: "10%" } }} />
