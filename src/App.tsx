@@ -150,6 +150,7 @@ const App = () => {
           setLocalStorageData={setLocalStorageData}
           isCelsius={isCelsius}
           setisCelsius={setisCelsius}
+          setisConnected={setisConnected}
         />
         </div>
         
