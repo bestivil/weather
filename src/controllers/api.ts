@@ -1,17 +1,19 @@
 import { WeatherType } from "../types";
 import getNextThreeHours from "./Next3Hours";
 
+// TODO: fix express server, properly call weather api and return data
+
 const fetchWeather = async (
   location: string,
   setWeatherInstance: (weather: WeatherType) => void
 ) => {
   try {
     const response = await fetch(
-      "https://api.weatherapi.com/v1/d=forecast.json?key=b471c1780bd24c85ad5190222232012&q=" +
+      "http://api.weatherapi.com/v1/d=forecast.json?key=b471c1780bd24c85ad5190222232012&q=" +
         location +
-        "&aqi=no"
-    );
+        "&aqi=no");
     const json = await response.json();
+    
 
     const weatherData: WeatherType = {
       TempC: json.current.temp_c,

@@ -12,7 +12,7 @@ export default function FavIcon({
   return (
     <button
       className={` bg-white-200 rounded-lg flex bk-icon  ring-black ${
-        location === localStorage.getItem("Fav") //TODO: colouring display from localStorage
+        location === localStorage.getItem("FavouriteLocations") //TODO: colouring display from localStorage
           ? `fill-yellow-300`
           : `hover:fill-yellow-300`
       } hover:duration-50  ${className}`}
