@@ -1,11 +1,13 @@
+// api/server.ts
 import { VercelRequest, VercelResponse } from '@vercel/node';
 import fetch from 'node-fetch';
 
 const API_KEY = 'b471c1780bd24c85ad5190222232012';
 
 export default async (req: VercelRequest, res: VercelResponse) => {
-  const requestURL = req.url || '';
-  const { pathname, searchParams } = new URL(requestURL, `http://${req.headers.host}`);
+  const requestUrl = req.url || '';
+  const fullUrl = new URL(requestUrl, `http://${req.headers.host}`);
+  const { pathname, searchParams } = fullUrl;
   const location = searchParams.get('location');
 
   if (!location) {
