@@ -6,6 +6,7 @@ const fetchWeather = async (
   location: string,
   setWeatherInstance: (weather: WeatherType) => void
 ) => {
+  location = location || "London";
   try {
     const response = await fetch(
       "http://localhost:8000/weather?location=" + location

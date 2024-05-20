@@ -9,6 +9,7 @@ const API_KEY = 'b471c1780bd24c85ad5190222232012';
 
 app.get('/weather', async (req: Request, res: Response) => {
     const { location } = req.query;
+    console.log("WORKING");
 
     if (!location) {
         res.status(400).send('Location parameter is required');
