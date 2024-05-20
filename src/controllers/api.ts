@@ -7,10 +7,11 @@ const fetchWeather = async (
 ) => {
   try {
     const response = await fetch(
-      "https://api.weatherapi.com/v1/forecast.json?key=b471c1780bd24c85ad5190222232012&q= " + location + "&aqi=no"
+      "https://api.weatherapi.com/v1/forecast.json?key=b471c1780bd24c85ad5190222232012&q= " +
+        location +
+        "&aqi=no"
     );
     const json = await response.json();
-    
 
     const weatherData: WeatherType = {
       TempC: json.current.temp_c,
@@ -63,7 +64,6 @@ const fetchWeather = async (
       weatherDataNext3Hr,
     ];
 
-    
     setWeatherInstance(weatherData);
 
     return weatherData;
@@ -80,14 +80,14 @@ export const getAutocompleteData = async (
 ) => {
   try {
     const response = await fetch(
-      "https://api.weatherapi.com/v1/search.json?key=b471c1780bd24c85ad5190222232012&q= " + location + "&aqi=no"
-    )
+      "https://api.weatherapi.com/v1/search.json?key=b471c1780bd24c85ad5190222232012&q= " +
+        location +
+        "&aqi=no"
+    );
     const json = await response.json();
 
     return json.map((item: any) => item.name);
-  
+  } catch (error) {
+    console.error("Error fetching weather data:", error);
   }
-    
-    catch (error) {
-      console.error("Error fetching weather data:", error);
-    }}
+};

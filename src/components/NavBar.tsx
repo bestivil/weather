@@ -24,11 +24,9 @@ export default function NavBar({
   setisConnected: (value: boolean) => void;
   autocompleteData: string;
   setAutocompleteData: (value: string) => void;
-
 }) {
-  
   const [citySearchArray, setCitySearchArray] = useState<string[]>([]);
-  
+
   const handleAddLocation = () => {
     //handling the adding
     const existingData = JSON.parse(localStorageData || "{}");
@@ -41,15 +39,16 @@ export default function NavBar({
     localStorage.setItem("FavouriteLocations", newData);
 
     setLocalStorageData(newData);
-
   };
   useEffect(() => {
     const getACInputs = async () => {
-      const weatherDataAC = await getAutocompleteData(autocompleteData, setAutocompleteData);
+      const weatherDataAC = await getAutocompleteData(
+        autocompleteData,
+        setAutocompleteData
+      );
       if (weatherDataAC) {
         setCitySearchArray(weatherDataAC);
-      }
-      else {
+      } else {
         setisConnected(false);
       }
     };
@@ -58,20 +57,27 @@ export default function NavBar({
 
   return (
     <>
-      
       <div className="w-full flex items-center rounded-full bg-[#E6E6E6] p-2 pr-6 md:pr-10 m-4 relative">
-        
         <div className="flex-grow flex justify-center space-x-4">
           <div className="">
-          <AC className="w-[175px] sm:w-[250px] md:w-[250px] lg:w-[500px]" locSelected={location} onSelectedClick={setLocation} onChangeTypedValue={setAutocompleteData} citySearch={citySearchArray}  />
+            <AC
+              className="w-[175px] sm:w-[250px] md:w-[250px] lg:w-[500px]"
+              locSelected={location}
+              onSelectedClick={setLocation}
+              onChangeTypedValue={setAutocompleteData}
+              citySearch={citySearchArray}
+            />
           </div>
           <div className="hidden md:block">
-          <CFToggle isCelsius={isCelsius} newAlignment={setisCelsius} className="hidden sm:block" />
+            <CFToggle
+              isCelsius={isCelsius}
+              newAlignment={setisCelsius}
+              className="hidden sm:block"
+            />
           </div>
         </div>
         <FavIcon location={location} onSelectedClick={handleAddLocation} />
       </div>
-      
     </>
   );
 }
