@@ -9,6 +9,8 @@ export default async (req: VercelRequest, res: VercelResponse) => {
   const { pathname, searchParams } = fullUrl;
   const location = searchParams.get('location');
 
+  console.log('Request location:', location);
+
   if (!location) {
     res.status(400).send('Location parameter is required');
     return;
