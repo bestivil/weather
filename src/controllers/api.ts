@@ -1,27 +1,25 @@
+// controllers/api.ts
 import { WeatherType } from "../types";
 import getNextThreeHours from "./Next3Hours";
 
-// Function to fetch weather data from the server
+const NEXT_PUBLIC_API_BASE_URL = 'http://localhost:8000';
+
+const getApiBaseUrl = () => {
+  if (typeof window !== 'undefined') {
+    return NEXT_PUBLIC_API_BASE_URL || '';
+  } else {
+    return `https://${process.env.VERCEL_URL}` || NEXT_PUBLIC_API_BASE_URL;
+  }
+};
+
 const fetchWeather = async (
   location: string,
   setWeatherInstance: (weather: WeatherType) => void
 ) => {
   location = location || "London";
   try {
-
-
-    const getApiBaseUrl = () => {
-      if (typeof window !== 'undefined') {
-        // We are in the browser
-        return process.env.NEXT_PUBLIC_API_BASE_URL || '';
-      } else {
-        // We are on the server
-        return `https://${process.env.VERCEL_URL}` || process.env.NEXT_PUBLIC_API_BASE_URL;
-      }
-    };
-
     const response = await fetch(
-      `${getApiBaseUrl()}/weather?location=${location}`
+      `${getApiBaseUrl()}/api/weather?location=${location}`
     );
     const json = await response.json();
 
@@ -93,7 +91,7 @@ export const getAutocompleteData = async (
 ) => {
   try {
     const response = await fetch(
-      "http://localhost:8000/autocomplete?location=" + location
+      `${getApiBaseUrl()}/api/autocomplete?location=${location}`
     );
     const json = await response.json();
 
