@@ -96,9 +96,10 @@ const App = () => {
       const weatherData = await fetchWeather(location, setWeatherInstance);
       if (weatherData) {
         setWeatherInstance(weatherData);
+        setisConnected(true);
       }
       else {
-        setisConnected(true);
+        setisConnected(false);
       }
     };
     WeatherFetchFunction();
