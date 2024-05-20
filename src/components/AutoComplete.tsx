@@ -1,9 +1,7 @@
 import { TextField } from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete";
-import { LocationType } from "../types";
-import { Locations } from "../constants";
-import { SyntheticEvent, useEffect, useState } from "react";
-import { getAutocompleteData } from "../controllers/api";
+import { SyntheticEvent } from "react";
+
 
 
 

@@ -1,15 +1,14 @@
 import { WeatherType } from "../types";
 import getNextThreeHours from "./Next3Hours";
 
+// Function to fetch weather data from the server
 const fetchWeather = async (
   location: string,
   setWeatherInstance: (weather: WeatherType) => void
 ) => {
   try {
     const response = await fetch(
-      "http://api.weatherapi.com/v1/d=forecast.json?key=b471c1780bd24c85ad5190222232012&q=" +
-        location +
-        "&aqi=no"
+      "http://localhost:8000/weather?location=" + location
     );
     const json = await response.json();
 
@@ -64,7 +63,6 @@ const fetchWeather = async (
       weatherDataNext3Hr,
     ];
 
-    
     setWeatherInstance(weatherData);
 
     return weatherData;
@@ -75,20 +73,19 @@ const fetchWeather = async (
 
 export default fetchWeather;
 
+// Function to fetch autocomplete data from the server
 export const getAutocompleteData = async (
   location: string | null,
   setWeatherData2: (weather: string) => void
 ) => {
   try {
     const response = await fetch(
-      "http://api.weatherapi.com/v1/search.json?key=b471c1780bd24c85ad5190222232012&q= " + location + "&aqi=no"
-    )
+      "http://localhost:8000/autocomplete?location=" + location
+    );
     const json = await response.json();
 
     return json.map((item: any) => item.name);
-  
+  } catch (error) {
+    console.error("Error fetching autocomplete data:", error);
   }
-    
-    catch (error) {
-      console.error("Error fetching weather data:", error);
-    }}
+};

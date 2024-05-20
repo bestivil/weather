@@ -18,6 +18,7 @@ export default function BasicCard({
   className?: string;
   isConnected?: boolean;
 }) {
+
   
   return (
     <>
