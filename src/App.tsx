@@ -27,6 +27,7 @@ const App = () => {
   const [localStorageData, setLocalStorageData] = useState<string | null>(null);
   const [isCelsius, setisCelsius] = useState(true);
   const [isConnected, setisConnected] = useState(true);
+  const [autocompleteData, setAutocompleteData] = useState<string>("London");
 
   let bgName = " ";
 
@@ -44,12 +45,10 @@ const App = () => {
         const parsedData = JSON.parse(favLocationsRaw || "{}");
         favLocations =(Object.values(parsedData));
       } catch (error) {
-        console.error('Error parsing favorite locations from localStorage:', error);
         favLocations = []; 
       }
   
       if (!Array.isArray(favLocations)) {
-        console.warn('FavouriteLocations is not an array:', favLocations);
         favLocations = [];
       }
   
@@ -58,14 +57,12 @@ const App = () => {
           const weatherData = await fetchWeather(location, () => {});
           return { name: location, weather: weatherData?.TempC, weatherF: weatherData?.TempF};
         } catch (error) {
-          console.error('Error fetching weather for location:', location, error);
           return null;
         }
       });
   
       const weatherDataArray = await Promise.all(weatherDataPromises);
       const validWeatherData = weatherDataArray.filter((data): data is FavouriteCard => data !== null);
-      console.log('Valid weather data:', validWeatherData);
       setfavouritesCards(validWeatherData);
 
     };
@@ -151,6 +148,8 @@ const App = () => {
           isCelsius={isCelsius}
           setisCelsius={setisCelsius}
           setisConnected={setisConnected}
+          autocompleteData={autocompleteData}
+          setAutocompleteData={setAutocompleteData}
         />
         </div>
         
@@ -171,8 +170,9 @@ const App = () => {
             forecasts={WeatherInstance?.nextForecast}
             isCelsius={isCelsius}
             isConnected={isConnected}
+            autoCompleteData={autocompleteData}
           />
-          {isConnected ?
+          {isConnected && autocompleteData !== "" ?
           <SecondaryRow
             weather={WeatherInstance}
             feels_like={

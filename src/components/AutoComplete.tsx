@@ -1,6 +1,7 @@
 import { TextField } from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete";
 import { SyntheticEvent } from "react";
+import { Locations } from "../constants";
 
 
 
@@ -15,7 +16,7 @@ export default function AC({ locSelected, onSelectedClick, className, onChangeTy
 
  
   
-  const Locations2 = ["London","New York"]
+  const Locations2 = ["Type a city name"];
 
   const handleClick = (event: SyntheticEvent, newValue: string | null) => {
     onSelectedClick(newValue);
