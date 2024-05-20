@@ -1,20 +1,22 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "src/**/*.{js,ts,jsx,tsx}",
-        "use": "@vercel/node"
-      },
-      {
-        "src": "api/**/*.ts",
-        "use": "@vercel/node"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/api/(.*)",
-        "dest": "/api/server.ts"
-      }
-    ]
-  }
-  
+  "version": 2,
+  "env": {
+    "NEXT_PUBLIC_API_BASE_URL": "@next_public_api_base_url"
+  },
+  "builds": [
+    {
+      "src": "src/**/*.{js,ts,jsx,tsx}",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/**/*.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/server.ts"
+    }
+  ]
+}
