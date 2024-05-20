@@ -19,7 +19,6 @@ app.get('/weather', (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         res.status(400).send('Location parameter is required');
         return;
     }
-    console.log(location);
     const url = `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${location}&aqi=no`;
     try {
         const response = yield fetch(url);

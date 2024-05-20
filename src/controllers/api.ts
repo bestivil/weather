@@ -8,8 +8,20 @@ const fetchWeather = async (
 ) => {
   location = location || "London";
   try {
+
+
+    const getApiBaseUrl = () => {
+      if (typeof window !== 'undefined') {
+        // We are in the browser
+        return process.env.NEXT_PUBLIC_API_BASE_URL || '';
+      } else {
+        // We are on the server
+        return `https://${process.env.VERCEL_URL}` || process.env.NEXT_PUBLIC_API_BASE_URL;
+      }
+    };
+
     const response = await fetch(
-      "http://localhost:8000/weather?location=" + location
+      `${getApiBaseUrl()}/weather?location=${location}`
     );
     const json = await response.json();
 
