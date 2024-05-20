@@ -8,9 +8,8 @@ import PrimaryRow from "./components/PrimaryRow";
 import SecondaryRow from "./components/SecondaryRow";
 import NavBar from "./components/NavBar";
 import CFToggle from "./components/toggle";
-import { slide as Menu } from 'react-burger-menu'
-import { styles } from './helpers/burger-icon-styles'
-
+import { slide as Menu } from "react-burger-menu";
+import { styles } from "./helpers/burger-icon-styles";
 
 export interface FavouriteCard {
   name: string;
@@ -18,12 +17,12 @@ export interface FavouriteCard {
   weatherF: number;
 }
 
-
-
 const App = () => {
   const [location, setLocation] = useState(Locations[0]);
   const [WeatherInstance, setWeatherInstance] = useState<WeatherType>();
-  const [favouritesCards, setfavouritesCards] = useState<FavouriteCard[] | null>(null);;
+  const [favouritesCards, setfavouritesCards] = useState<
+    FavouriteCard[] | null
+  >(null);
   const [localStorageData, setLocalStorageData] = useState<string | null>(null);
   const [isCelsius, setisCelsius] = useState(true);
   const [isConnected, setisConnected] = useState(true);
@@ -32,8 +31,8 @@ const App = () => {
   let bgName = " ";
 
   const handleAlignment = (newAlignment: boolean) => {
-    if (newAlignment !== null) { 
-      setisCelsius(newAlignment); 
+    if (newAlignment !== null) {
+      setisCelsius(newAlignment);
     }
   };
 
@@ -43,34 +42,37 @@ const App = () => {
       let favLocations = [] as any[];
       try {
         const parsedData = JSON.parse(favLocationsRaw || "{}");
-        favLocations =(Object.values(parsedData));
+        favLocations = Object.values(parsedData);
       } catch (error) {
-        favLocations = []; 
+        favLocations = [];
       }
-  
+
       if (!Array.isArray(favLocations)) {
         favLocations = [];
       }
-  
+
       const weatherDataPromises = favLocations.map(async (location) => {
         try {
           const weatherData = await fetchWeather(location, () => {});
-          return { name: location, weather: weatherData?.TempC, weatherF: weatherData?.TempF};
+          return {
+            name: location,
+            weather: weatherData?.TempC,
+            weatherF: weatherData?.TempF,
+          };
         } catch (error) {
           return null;
         }
       });
-  
-      const weatherDataArray = await Promise.all(weatherDataPromises);
-      const validWeatherData = weatherDataArray.filter((data): data is FavouriteCard => data !== null);
-      setfavouritesCards(validWeatherData);
 
+      const weatherDataArray = await Promise.all(weatherDataPromises);
+      const validWeatherData = weatherDataArray.filter(
+        (data): data is FavouriteCard => data !== null
+      );
+      setfavouritesCards(validWeatherData);
     };
-  
+
     fetchAllFavouritesWeather();
   }, [localStorageData]);
-
-
 
   const handleRemove = (e: React.MouseEvent<HTMLButtonElement>) => {
     const existingData = JSON.parse(localStorageData || "{}");
@@ -94,8 +96,7 @@ const App = () => {
       if (weatherData) {
         setWeatherInstance(weatherData);
         setisConnected(true);
-      }
-      else {
+      } else {
         setisConnected(false);
       }
     };
@@ -103,18 +104,10 @@ const App = () => {
   }, [location]);
 
   if (!isConnected) {
-    bgName = "bg-slate-800 h-screen"
+    bgName = "bg-slate-800 h-screen";
+  } else {
+    bgName = "bg-slate-800 sm:h-full xl:h-screen";
   }
-  else {
-    bgName = "bg-slate-800 sm:h-full xl:h-screen"
-  }
-  
-
-  
-  
-    
-
-  
 
   return (
     <>
@@ -122,47 +115,50 @@ const App = () => {
         <Menu id="burger-menu" styles={styles}>
           <div className="h-screen flex flex-col">
             <div className=""></div>
-            <CFToggle className="bg-neutral-200 mt-96 " isCelsius={isCelsius} newAlignment={handleAlignment} />
+            <CFToggle
+              className="bg-neutral-200 mt-96 "
+              isCelsius={isCelsius}
+              newAlignment={handleAlignment}
+            />
           </div>
         </Menu>
       </div>
-      
 
       <div
-        className = {bgName}
+        className={bgName}
         style={{
           backgroundSize: "cover",
           backgroundPosition: "center",
-          
+
           display: "flex",
           flexDirection: "column",
           marginTop: "-0px",
         }}
       >
         <div className="flex flex-wrap justify-center gap-4">
-        <NavBar
-          location={location}
-          setLocation={setLocation}
-          localStorageData={localStorageData}
-          setLocalStorageData={setLocalStorageData}
-          isCelsius={isCelsius}
-          setisCelsius={setisCelsius}
-          setisConnected={setisConnected}
-          autocompleteData={autocompleteData}
-          setAutocompleteData={setAutocompleteData}
-        />
+          <NavBar
+            location={location}
+            setLocation={setLocation}
+            localStorageData={localStorageData}
+            setLocalStorageData={setLocalStorageData}
+            isCelsius={isCelsius}
+            setisCelsius={setisCelsius}
+            setisConnected={setisConnected}
+            autocompleteData={autocompleteData}
+            setAutocompleteData={setAutocompleteData}
+          />
         </div>
-        
-        {isConnected ?
-        <Favourites
+
+        {isConnected ? (
+          <Favourites
             fav={favouritesCards}
             handleRemove={handleRemove}
             currentLocationView={location}
             localStorageData={localStorageData}
             setLocalStorageData={setLocalStorageData}
-            CF = {isCelsius}
-          /> : null}
-        
+            CF={isCelsius}
+          />
+        ) : null}
 
         <div className="items-center w-full">
           <PrimaryRow
@@ -172,18 +168,18 @@ const App = () => {
             isConnected={isConnected}
             autoCompleteData={autocompleteData}
           />
-          {isConnected && autocompleteData !== "" ?
-          <SecondaryRow
-            weather={WeatherInstance}
-            feels_like={
-              isCelsius
-                ? WeatherInstance?.feelsLikeC
-                : WeatherInstance?.feelslikeF
-            }
-          /> : null}
+          {isConnected && autocompleteData !== "" ? (
+            <SecondaryRow
+              weather={WeatherInstance}
+              feels_like={
+                isCelsius
+                  ? WeatherInstance?.feelsLikeC
+                  : WeatherInstance?.feelslikeF
+              }
+            />
+          ) : null}
         </div>
-        </div>
-   
+      </div>
     </>
   );
 };

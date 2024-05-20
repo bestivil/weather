@@ -23,7 +23,7 @@ const Favourites = ({
 
     const currentKeys = Object.keys(existingData);
     const nextKey =
-      currentKeys.length === 0 ? 0 : Math.max(...currentKeys.map(Number)) + 1; 
+      currentKeys.length === 0 ? 0 : Math.max(...currentKeys.map(Number)) + 1;
 
     const newData = JSON.stringify({
       ...existingData,
@@ -110,10 +110,12 @@ const Favourites = ({
                 <CardContent>
                   <div className=" ml-[35%] text-neutral-200 ">{item.name}</div>
                   <p className="font-bold relative text-center mt-6">
-                  <span className="text-center text-5xl text-neutral-200">{CF ? item.weather : item.weatherF}</span>
-                  <span className="text-sm absolute -mt-2 ml-0.5 text-neutral-200">
-                    °
-                  </span>
+                    <span className="text-center text-5xl text-neutral-200">
+                      {CF ? item.weather : item.weatherF}
+                    </span>
+                    <span className="text-sm absolute -mt-2 ml-0.5 text-neutral-200">
+                      °
+                    </span>
                   </p>
                 </CardContent>
                 <CardActions></CardActions>
