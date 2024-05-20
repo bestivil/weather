@@ -1,4 +1,3 @@
-// api/server.ts
 import { VercelRequest, VercelResponse } from '@vercel/node';
 import fetch from 'node-fetch';
 
