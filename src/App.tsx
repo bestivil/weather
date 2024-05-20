@@ -10,7 +10,6 @@ import NavBar from "./components/NavBar";
 import CFToggle from "./components/toggle";
 import { slide as Menu } from 'react-burger-menu'
 import { styles } from './helpers/burger-icon-styles'
-import { Button } from "@mui/material";
 
 
 export interface FavouriteCard {
@@ -84,7 +83,7 @@ const App = () => {
     const newData: string[] = [];
     currentKeys.forEach((key) => {
       if (key !== "") {
-        newData.push(key as string); //TODO: push location back into array
+        newData.push(key as string);
       }
     });
 
@@ -99,7 +98,7 @@ const App = () => {
         setWeatherInstance(weatherData);
       }
       else {
-        setisConnected(false);
+        setisConnected(true);
       }
     };
     WeatherFetchFunction();

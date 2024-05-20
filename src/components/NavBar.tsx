@@ -1,8 +1,6 @@
 import AC from "./AutoComplete";
 import FavIcon from "./FavIcon";
 import CFToggle from "./toggle";
-import { slide as Menu } from 'react-burger-menu'
-import { styles } from '../helpers/burger-icon-styles'
 import { useEffect, useState } from "react";
 import { getAutocompleteData } from "../controllers/api";
 
