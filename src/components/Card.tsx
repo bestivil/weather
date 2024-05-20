@@ -8,7 +8,8 @@ export default function BasicCard({
   img,
   conditions,
   className = "",
-  isConnected
+  isConnected,
+  autoCompleteData
 }: {
   weatherC: number | undefined;
   time?: string;
@@ -17,6 +18,7 @@ export default function BasicCard({
   conditions: string | undefined;
   className?: string;
   isConnected?: boolean;
+  autoCompleteData?: string;
 }) {
 
   

@@ -16,7 +16,7 @@ const CFToggle = ({
       value={isCelsius}
       onChange={(event, nextAlignment) => newAlignment(nextAlignment)}
       exclusive
-      sx={{ height: "10%" }}
+      sx={{ height: "50px" }}
       className={className}
     >
       <ToggleButton value={true}>Celsius</ToggleButton>

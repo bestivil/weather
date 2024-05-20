@@ -7,12 +7,15 @@ export default function PrimaryRow({
   forecasts,
   isCelsius,
   isConnected,
+  autoCompleteData
 }: {
   weather?: WeatherType;
   label?: string;
   forecasts?: Array<WeatherType>;
   isCelsius: boolean;
   isConnected: boolean;
+  autoCompleteData?: string;
+
 }) {
   return (
       <div className="flex flex-wrap justify-center gap-4 m-3">
@@ -29,7 +32,7 @@ export default function PrimaryRow({
         </div>
         
         
-        {isConnected ? forecasts?.map((forecast: any, index: number) => (
+        {isConnected ? forecasts?.map((forecast, index) => (
         <div className="w-full sm:w-1/3 md:w-1/3 xl:w-1/6 flex-grow flex" key={index}>
           <BasicCard
             weatherC={isCelsius ? forecast.TempC : forecast.TempF}
@@ -39,6 +42,7 @@ export default function PrimaryRow({
             time={forecast.time + ":00"}
             className="max-w-full"
             isConnected={isConnected}
+            autoCompleteData={autoCompleteData}
           />
         </div>
       )): null}

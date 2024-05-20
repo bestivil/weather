@@ -12,6 +12,8 @@ export default function NavBar({
   localStorageData,
   setLocalStorageData,
   setisConnected,
+  autocompleteData,
+  setAutocompleteData,
 }: {
   location: string;
   setLocation: (value: string) => void;
@@ -20,9 +22,11 @@ export default function NavBar({
   localStorageData: string | null;
   setLocalStorageData: (value: string) => void;
   setisConnected: (value: boolean) => void;
+  autocompleteData: string;
+  setAutocompleteData: (value: string) => void;
 
 }) {
-  const [autocompleteData, setAutocompleteData] = useState<string>("");
+  
   const [citySearchArray, setCitySearchArray] = useState<string[]>([]);
   
   const handleAddLocation = () => {
@@ -55,11 +59,11 @@ export default function NavBar({
   return (
     <>
       
-      <div className="w-full flex items-center justify-between rounded-full bg-[#E6E6E6] p-2 pr-6 md:pr-10 m-4 relative">
+      <div className="w-full flex items-center rounded-full bg-[#E6E6E6] p-2 pr-6 md:pr-10 m-4 relative">
         
-        <div className="flex-grow flex items-center justify-center space-x-4">
+        <div className="flex-grow flex justify-center space-x-4">
           <div className="">
-          <AC className="w-[250px]" locSelected={location} onSelectedClick={setLocation} onChangeTypedValue={setAutocompleteData} citySearch={citySearchArray}  />
+          <AC className="w-[175px] sm:w-[250px] md:w-[250px] lg:w-[500px]" locSelected={location} onSelectedClick={setLocation} onChangeTypedValue={setAutocompleteData} citySearch={citySearchArray}  />
           </div>
           <div className="hidden md:block">
           <CFToggle isCelsius={isCelsius} newAlignment={setisCelsius} className="hidden sm:block" />
