@@ -16,7 +16,7 @@ export default function AC({
   className?: string; // used for tailwind
   citySearch: string[];
 }) {
-  const Locations2 = ["Type a city name"];
+  const Locations2 = ["London", "New York"];
 
   const handleClick = (event: SyntheticEvent, newValue: string | null) => {
     onSelectedClick(newValue);

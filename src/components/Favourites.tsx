@@ -73,9 +73,10 @@ const Favourites = ({
             </button>
           </div>
         ) : (
-          <div className=" flex m-4 ml-10 mb-1 rounded-md">
+          <div className=" flex m-4 ml-10 mb-1 rounded-md overflow-x-auto whitespace-nowrap">
             {fav?.map((item, index) => (
               <Card
+                key={index} className="flex-none relative z-0"
                 sx={{
                   height: 150,
                   width: 200,
@@ -85,7 +86,7 @@ const Favourites = ({
                   marginLeft: "15px",
                 }}
               >
-                <div className=" grid absolute ml-48 -mt-3 hover:scale-110 hover:duration-200 opacity-85 -translate-x-1">
+                <div className=" absolute top-1 right-1 z-10 hover:scale-110 hover:duration-200 opacity-85">
                   <button
                     name={index.toString()}
                     onClick={(e) => handleRemove(e)}
